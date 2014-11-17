@@ -122,12 +122,12 @@ public class UserBean  implements Serializable{
     
  public String login() {
         loggedIn = true;
-        return "planetarium";
+        return "home";
     }
 
     public String logout() {
         loggedIn = false;
-        return "login";
+        return "index";
     }
 
     public void checkLogin(ComponentSystemEvent event) {
