@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="windowTitle"/></title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>    
+    <body>
+        <div id="templatemo_menu">
+            <ul>
+                <li><a href="index.html" class="current">Home</a></li>
+                <li><a href="subpage.html">Books</a></li>            
+                <li><a href="subpage.html">About us</a></li>  
+                <li><a href="#">Logout</a></li> 
+            </ul>
+        </div> <!-- end of menu -->
+
+        <div id="templatemo_header">
+            <div id="templatemo_special_offers">
+                <h:form>
+                    <p:autoComplete id="acSimple" value="#{book.book.title}" completeMethod="#{autoCompleteView.completeText}" style=" background-color: #212120; " />
+                    <div class="buy_now_button"><a href="subpage.html">Search</a></div>
+                </h:form>
+            </div>
+
+
+            <div id="templatemo_new_books">
+                <p style=" font-size: 18px">Recently added</p><br/>
+                <ul>
+                    <li>Suspen disse</li>
+                    <li>Maece nas metus</li>
+                    <li>In sed risus ac feli</li>
+                </ul>
+                <!--            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>-->
+            </div>
+        </div>    </body>
+</html>

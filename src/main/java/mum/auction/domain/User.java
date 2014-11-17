@@ -32,6 +32,16 @@ public class User {
     
     List<Auction> auctions= new ArrayList<Auction>();
 
+    public User(String firstName, String lastName, String studentId, String department, String email, String userName, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.studentId = studentId;
+        this.department = department;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+
+    }
     public int getId() {
         return id;
     }

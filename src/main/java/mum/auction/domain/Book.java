@@ -8,30 +8,26 @@ package mum.auction.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Komal
  */
 public class Book {
-    
+
     private int id;
     private String title;
     private String desc;
     private String author;
     private String publisher;
     private String edition;
+    private Category caterogy;
     private List<Auction> auctionList = new ArrayList<Auction>();
-    
-    
-    public Book()
-    {
-        
+
+    public Book() {
+
     }
-    
-    
-    public Book(String title, String desc, String auhtor, String publisher, String edition)
-    {
+
+    public Book(String title, String desc, String auhtor, String publisher, String edition) {
         this.title = title;
         this.desc = desc;
         this.author = auhtor;
@@ -109,6 +105,14 @@ public class Book {
         this.edition = edition;
     }
 
+    public Category getCaterogy() {
+        return caterogy;
+    }
+
+    public void setCaterogy(Category caterogy) {
+        this.caterogy = caterogy;
+    }
+
     /**
      * @return the auctionList
      */
@@ -122,5 +126,5 @@ public class Book {
     public void setAuctionList(List<Auction> auctionList) {
         this.auctionList = auctionList;
     }
-       
+
 }
