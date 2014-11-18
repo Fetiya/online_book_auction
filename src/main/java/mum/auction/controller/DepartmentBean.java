@@ -12,39 +12,42 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import mum.auction.dao.impl.AuctionDAOImpl;
 import mum.auction.dao.impl.CategoryDAOImpl;
+import mum.auction.dao.impl.DepartmentDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
 import mum.auction.dao.intr.CategoryDAO;
+import mum.auction.dao.intr.DepartmentDAO;
 import mum.auction.domain.Auction;
 import mum.auction.domain.Category;
+import mum.auction.domain.Department;
 
 /**
  *
  * @author Hiwot
  */
 
-@Named("category")
+@Named("department")
 @SessionScoped
-public class CategoryBean implements Serializable {
+public class DepartmentBean implements Serializable {
 
-    private CategoryDAO categoryDAO = new CategoryDAOImpl();
-    private Category category= new Category();
+    private DepartmentDAO departmentDAO = new DepartmentDAOImpl();
+    private Department department= new Department();
 
-    public Category getCategory() {
-        return category;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public String addCategory() {
-        categoryDAO.addCategory(category);
+    public String addDepartment() {
+        departmentDAO.addDepartment(department);
         
         return "index";
     }
 
-    public void cancelCategory() {
-        categoryDAO.removeCategory(category);
+    public void canceDepartment() {
+        departmentDAO.removeDepartment(department);
     }
 
     public List<String> completeTitle() {
