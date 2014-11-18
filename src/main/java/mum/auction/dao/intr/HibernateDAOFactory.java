@@ -15,5 +15,7 @@ public class HibernateDAOFactory extends DAOFactory
 	public BookDAO getBookDAO() { return new BookDAOImpl(); }
 	public BidDAO getBidDAO() { return new BidDAOImpl(); }
 	public UserDAO getUserDAO() { return new UserDAOImpl(); }
-	public AuctionDAO getAuctionDAO() { return new AuctionDAOImpl(); }
+	public AuctionDAO getAuctionDAO() { return new AuctionDAOImpl();}
+        public DepartmentDAO getDepartmentDAO() { return new DepartmentDAOImpl(); }
+	public BookCategoryDAO getBookCategoryDAO(){ return new BookCategoryDAOImpl();}
 }

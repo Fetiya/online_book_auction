@@ -11,11 +11,11 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import mum.auction.dao.impl.AuctionDAOImpl;
-import mum.auction.dao.impl.CategoryDAOImpl;
+import mum.auction.dao.impl.BookCategoryDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
-import mum.auction.dao.intr.CategoryDAO;
+import mum.auction.dao.intr.BookCategoryDAO;
 import mum.auction.domain.Auction;
-import mum.auction.domain.Category;
+import mum.auction.domain.BookCategory;
 
 /**
  *
@@ -26,25 +26,25 @@ import mum.auction.domain.Category;
 @SessionScoped
 public class CategoryBean implements Serializable {
 
-    private CategoryDAO categoryDAO = new CategoryDAOImpl();
-    private Category category= new Category();
+    private BookCategoryDAO categoryDAO = new BookCategoryDAOImpl();
+    private BookCategory category= new BookCategory();
 
-    public Category getCategory() {
+    public BookCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(BookCategory category) {
         this.category = category;
     }
 
     public String addCategory() {
-        categoryDAO.addCategory(category);
+      //  categoryDAO.addCategory(category);
         
         return "index";
     }
 
     public void cancelCategory() {
-        categoryDAO.removeCategory(category);
+     //   categoryDAO.removeCategory(category);
     }
 
     public List<String> completeTitle() {

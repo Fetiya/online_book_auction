@@ -30,8 +30,10 @@ public class BookTest {
         config.addAnnotatedClass(Book.class);
         config.addAnnotatedClass(Bid.class);
         config.addAnnotatedClass(User.class);
+         config.addAnnotatedClass(BookCategory.class);
+            config.addAnnotatedClass(Department.class);
         config.configure();
-    //     new SchemaExport(config).create(true, true);
+       new SchemaExport(config).create(true, true);
         
         
 //        SessionFactory factory = config.buildSessionFactory();

@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -28,13 +30,16 @@ public class User {
     private String firstName;
     private String lastName;
     private String studentId;
+    
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     private Department department;
     private String email;
     private String userName;
     private String password;
     
      @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    List<Auction> auctions= new ArrayList<Auction>();
+    List<Auction> auctions;
     
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     List<Bid> bids;
@@ -53,8 +58,6 @@ public class User {
         this.bids = bids;
     }
 
-    
-    
     
     
     

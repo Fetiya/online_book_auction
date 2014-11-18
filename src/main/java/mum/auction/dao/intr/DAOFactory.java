@@ -28,6 +28,8 @@ public abstract class DAOFactory
 	public abstract AuctionDAO getAuctionDAO();
 	public abstract BidDAO getBidDAO();
 	public abstract UserDAO getUserDAO();
+        public abstract DepartmentDAO getDepartmentDAO();
+	public abstract BookCategoryDAO getBookCategoryDAO();
 	
 	
 }
