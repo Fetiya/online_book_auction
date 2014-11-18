@@ -356,4 +356,46 @@ img {
     color: #fff;
     font-weight: normal;
 }
+/*#templatemo_menu li a{
+    color:black;
+    display:block;
+    font-weight:bold;
+    line-height:43px;
+    padding:0px 25px;
+    text-align:center;
+    text-decoration:none;
+}
+#templatemo_menu li a:hover{ color:white;
+                  text-decoration:none;
+}
+#templatemo_menu ul li ul{
+
+    border-left:2px solid #666666;
+    border-right:2px solid #0079b2;
+    border-bottom:2px solid #0079b2; 
+    display:none;
+    height:auto;
+    position:absolute;
+    width:150px;
+    z-index:200;
+}
+#templatemo_menu ul li:hover ul{
+    display:block; background-color: #111110;
+
+}
+.menu li li {
+    display:block;
+    float:none;
+    width:205px;
+}
+#templatemo_menu ul li ul a{
+    display:block;
+    font-size:12px;
+    font-style:normal;
+    padding:0px 10px 0px 15px;
+    text-align:left;
+}
+#templatemo_menu li ul a:hover{
+    color:#fff; background-color:  #969547;
+}*/
 /* end of footer */

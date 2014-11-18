@@ -50,40 +50,40 @@ and open the template in the editor.
                     <h1>Sign up</h1>
                     <h:form  id="showSignUp">
                         <h:panelGrid columns="3">
-                            <h:outputText value="First Name: "/>
-                            <h:inputText id="first" value="#{user.firstName}" validator="#{user.validateFirstName}">
+                            <p:outputLabel value="First Name: "/>
+                            <p:inputText id="first" value="#{userBn.firstName}" validator="#{user.validateFirstName}">
                                 <f:ajax event="blur" render="firstError"/>
-                            </h:inputText>
+                            </p:inputText>
                             <h:message for="first" id="firstError" style="color: yellow"/>
-                            <h:outputText value="Last Name: "/>
-                            <h:inputText id="last" value="#{user.lastName}" validator="#{user.validateLastName}">
+                            <p:outputLabel value="Last Name: "/>
+                            <p:inputText id="last" value="#{userBn.lastName}" validator="#{user.validateLastName}">
                                 <f:ajax event="blur" render="lastError"/>
-                            </h:inputText>
+                            </p:inputText>
                             <h:message for="last"  id="lastError" style="color: yellow"/>
-                            <h:outputText value="Studnet ID: "/>
-                            <h:inputText id="sid" value="#{user.studentId}" validator="#{user.validateStudentId}">
+                            <p:outputLabel value="Studnet ID: "/>
+                            <p:inputText id="sid" value="#{userBn.studentId}" validator="#{user.validateStudentId}">
                                 <f:ajax event="blur" render="studentError"/>
-                            </h:inputText>
+                            </p:inputText>
                             <h:message for="sid"  id="studentError" style="color: yellow"/>
-                            <h:outputText value="Department: "/>
-                            <h:inputText id="dep" value="#{user.department}">
-                            </h:inputText>
+                            <p:outputLabel value="Department: "/>
+                            <p:selectOneMenu id="dep" value="#{department.department}"/>
+                            
                             <h:message for="dep" style="color: yellow"/>
-                            <h:outputText value="Email: "/>
-                            <h:inputText id="email" value="#{user.email}" validator="#{user.validateEmail}">
+                            <p:outputLabel value="Email: "/>
+                            <p:inputText id="email" value="#{userBn.email}" validator="#{user.validateEmail}">
                                 <f:ajax event="blur" render="emailError"/>
-                            </h:inputText>
+                            </p:inputText>
                             <h:message for="email" id="emailError" style="color: yellow"/>
-                            <h:outputText value="User name: "/>
-                            <h:inputText id="username" value="#{user.userName}" validator="#{user.validateUserName}">
+                            <p:outputLabel value="User name: "/>
+                            <p:inputText id="username" value="#{userBn.userName}" validator="#{user.validateUserName}">
                                 <f:ajax event="blur" render="userNameError"/>
-                            </h:inputText>
+                            </p:inputText>
                             <h:message for="username" id="userNameError" style="color: yellow"/>
-                            <h:outputText value="Password: "/>
-                            <h:inputSecret id="password" value="#{user.password}" >
-                            </h:inputSecret>
+                            <p:outputLabel value="Password: "/>
+                            <p:password id="password" value="#{userBn.password}" />
+                           
                             <h:message for="password" style="color: yellow"/>
-                            <h:commandButton class="buy_now_button2" value="Sign Up" action="#{user.signUp()}"/>
+                            <h:commandButton class="buy_now_button2" value="Sign Up" action="#{userBn.signUp()}"/>
                         </h:panelGrid>
                     </h:form></div>
             </div>
