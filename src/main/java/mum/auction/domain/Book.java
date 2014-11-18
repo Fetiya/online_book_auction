@@ -7,6 +7,7 @@ package mum.auction.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 /**
  *
  * @author Komal
@@ -23,17 +25,19 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
-   
+
     
     @Id
     @GeneratedValue
     private Long id;
+
 
     private String title;
     private String description;
     private String author;
     private String publisher;
     private String edition;
+
 
     
     @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
@@ -49,7 +53,9 @@ public class Book {
 
     }
 
+
     public Book(String title, String description, String author, String publisher, String edition, List<Auction> auctionList, Category caterogy) {
+
         this.title = title;
         this.description = description;
         this.author = author;
@@ -211,6 +217,5 @@ public class Book {
         return true;
     }
 
-   
 
 }

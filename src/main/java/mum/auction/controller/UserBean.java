@@ -145,7 +145,9 @@ public class UserBean  implements Serializable{
     }
      public String signUp(){
         
+
      //   users.add(new User(firstName,lastName,studentId,department,email,userName,password));
+
         return "home";
         
     }

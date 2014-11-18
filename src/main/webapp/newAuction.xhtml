@@ -11,10 +11,12 @@
         <h:form>
 
 
+
             <h:panelGrid columns="2" cellpadding="5">
 <!--                <h:outputLabel value="Book Title" for="bookTitle" />
                 <p:autoComplete id="bookTitle" value="#{auctionBn.auction.book.title}" 
                                 completeMethod="#{auctionBn.completeTitle()}" />-->
+
               StartDate  <p:outputLabel  for="startDate" value="#{msgs.auctionStartDate}" />
                 <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"></p:calendar>              
              EndDate   <p:outputLabel for="endDate" value="#{msgs.auctionEndDate}" />
