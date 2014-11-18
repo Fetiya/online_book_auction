@@ -26,25 +26,39 @@ public class Bid  {
     
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name = "bid_id")
     private Auction auction;
     
-    @OneToOne(mappedBy = "bid",cascade = CascadeType.ALL)
+   
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     
     private double offeredPrice;
 
+    
+    
     public Bid() {
     }
 
-    public Bid(Auction auction, User user, int offeredPrice) {
+    public Bid(Auction auction, User user, double offeredPrice) {
         this.auction = auction;
         this.user = user;
         this.offeredPrice = offeredPrice;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+  
 
     public Auction getAuction() {
         return auction;
@@ -73,9 +87,9 @@ public class Bid  {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.auction);
-        hash = 17 * hash + Objects.hashCode(this.user);
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.offeredPrice) ^ (Double.doubleToLongBits(this.offeredPrice) >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.auction);
+        hash = 37 * hash + Objects.hashCode(this.user);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.offeredPrice) ^ (Double.doubleToLongBits(this.offeredPrice) >>> 32));
         return hash;
     }
 
@@ -94,11 +108,10 @@ public class Bid  {
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.offeredPrice) != Double.doubleToLongBits(other.offeredPrice)) {
-            return false;
-        }
         return true;
     }
+
+  
     
     
     

@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+          
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
@@ -10,9 +11,12 @@
         <h:form>
 
 
-            <h:panelGrid columns="3" cellpadding="5">
-                <h:outputLabel value="Book Title" for="bookTitle" />
-                <p:autoComplete id="bookTitle" value="#{auctionBn.auction.book.title}" completeMethod="#{auctionBn.completeTitle}" />
+
+            <h:panelGrid columns="2" cellpadding="5">
+<!--                <h:outputLabel value="Book Title" for="bookTitle" />
+                <p:autoComplete id="bookTitle" value="#{auctionBn.auction.book.title}" 
+                                completeMethod="#{auctionBn.completeTitle()}" />-->
+
               StartDate  <p:outputLabel  for="startDate" value="#{msgs.auctionStartDate}" />
                 <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"></p:calendar>              
              EndDate   <p:outputLabel for="endDate" value="#{msgs.auctionEndDate}" />

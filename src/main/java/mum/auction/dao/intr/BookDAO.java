@@ -12,15 +12,7 @@ import mum.auction.domain.Book;
  *
  * @author Komal
  */
-public interface BookDAO {
-       
-     public void addBook(Book book);
-     
-     public void updateBook(Book book);
-     
-     public Book getBookId(int id);
-     
-     public List<Book> getAllBooks();
-     
-     public void removeBook(Book book);    
+public interface  BookDAO extends GenericDAO<Book, Long>
+{
+	
 }
