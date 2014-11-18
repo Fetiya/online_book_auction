@@ -8,9 +8,11 @@ package mum.auction.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,7 +23,7 @@ public class User {
     
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String studentId;
@@ -30,13 +32,27 @@ public class User {
     private String userName;
     private String password;
     
+     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     List<Auction> auctions= new ArrayList<Auction>();
+    
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Bid> bids;
 
-    public int getId() {
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -14,9 +14,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import mum.auction.dao.impl.BookDAOImpl;
+
 import mum.auction.domain.Book;
 import mum.auction.dao.intr.BookDAO;
+
+import mum.auction.dao.intr.*;
+import mum.auction.dao.impl.*;
 
 /**
  *
@@ -30,6 +33,9 @@ public class BookBean implements Serializable{
     private Book book;
     private List<Book> books = new ArrayList<Book>();
     
+    
+    
+    private DAOFactory  factory=DAOFactory.getFactory();
     public Book getBook()
     {
         return book;
@@ -56,8 +62,14 @@ public class BookBean implements Serializable{
     
     public void addBook()
     {
-         BookDAO bookDao = new BookDAOImpl();
-         bookDao.addBook(book);
+        
+        BookDAO bookDao = factory.getBookDAO();
+        // bookDao.addBook(book);
+        bookDao.beginTransaction();
+        bookDao.save(book);
+        bookDao.commitTransaction();
+        
+        
     }
    
     public void validateBookTitle(FacesContext fc, UIComponent c, Object value) {

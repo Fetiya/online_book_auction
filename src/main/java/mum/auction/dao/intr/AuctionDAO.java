@@ -13,15 +13,7 @@ import mum.auction.domain.Auction;
  *
  * @author Fetiya
  */
-public interface AuctionDAO {
-    
-    public void addAuction(Auction auction);
-     
-    public void updateAuction(Auction auction);
-     
-    public Auction getAuction(int id);
-     
-    public List<Auction> getAllAuctions();
-     
-    public void removeAuction(Auction auction);
+public interface  AuctionDAO extends GenericDAO<Auction, Long>
+{
+	
 }

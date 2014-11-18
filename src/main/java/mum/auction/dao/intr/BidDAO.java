@@ -13,15 +13,7 @@ import mum.auction.domain.Bid;
  *
  * @author Fetiya
  */
-public interface BidDAO {
-    
-    public void addBid(Bid bid);
-     
-     public void updateBid(Bid bid);
-     
-     public Bid getBid(int id);
-     
-     public List<Bid> getAllBids();
-     
-     public void removeBid(Bid bid);
+public interface  BidDAO extends GenericDAO<Bid, Long>
+{
+	
 }

@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import mum.auction.dao.impl.AuctionDAOImpl;
+//mport mum.auction.dao.impl.AuctionDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
+import mum.auction.dao.intr.BookDAO;
+import mum.auction.dao.intr.DAOFactory;
 import mum.auction.domain.Auction;
 
 /**
@@ -23,9 +25,11 @@ import mum.auction.domain.Auction;
 @SessionScoped
 public class AuctionBean implements Serializable {
 
-    private AuctionDAO auctionDAO = new AuctionDAOImpl();
-    private Auction auction= new Auction();
+  private AuctionDAO auctionDAO;
+  private Auction auction= new Auction();
 
+  
+  private DAOFactory  factory=DAOFactory.getFactory();
     public Auction getAuction() {
         return auction;
     }
@@ -35,14 +39,18 @@ public class AuctionBean implements Serializable {
     }
 
     public String addAuction() {
-        auctionDAO.addAuction(auction);
+       AuctionDAO auctionDao = factory.getAuctionDAO();
         
-        return "index";
+        auctionDao.beginTransaction();
+        auctionDao.save(auction);
+        auctionDao.commitTransaction();
+        
+        return "index.html";
     }
 
     public void cancelAuction() {
-        auctionDAO.removeAuction(auction);
-    }
+    //   auctionDAO.removeAuction(auction);
+}
 
     public List<String> completeTitle() {
         String query = null;

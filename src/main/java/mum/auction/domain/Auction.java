@@ -8,10 +8,13 @@ package mum.auction.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -25,17 +28,57 @@ public class Auction {
     
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     
-    private User user;
-    private Book book= new Book();
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+  
+    
     private Date startDate;
     private Date endDate;
     private double minimumPrice;
     private String status;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(mappedBy = "auction",cascade = CascadeType.ALL)
     private List<Bid> bids;
+
+    public Auction() {
+    }
+
+    public Auction(Book book, Date startDate, Date endDate, double minimumPrice, String status, User user, List<Bid> bids) {
+        this.book = book;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.minimumPrice = minimumPrice;
+        this.status = status;
+        this.user = user;
+        this.bids = bids;
+    }
+
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+    
+    
+    
     
     
     public String getStatus() {
@@ -54,14 +97,7 @@ public class Auction {
         this.user = user;
     }
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
+ 
     public Date getStartDate() {
         return startDate;
     }
@@ -85,6 +121,64 @@ public class Auction {
     public void setMinimumPrice(double minimumPrice) {
         this.minimumPrice = minimumPrice;
     }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.book);
+        hash = 79 * hash + Objects.hashCode(this.startDate);
+        hash = 79 * hash + Objects.hashCode(this.endDate);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.minimumPrice) ^ (Double.doubleToLongBits(this.minimumPrice) >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.status);
+        hash = 79 * hash + Objects.hashCode(this.user);
+        hash = 79 * hash + Objects.hashCode(this.bids);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Auction other = (Auction) obj;
+        if (!Objects.equals(this.book, other.book)) {
+            return false;
+        }
+        if (!Objects.equals(this.startDate, other.startDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.endDate, other.endDate)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.minimumPrice) != Double.doubleToLongBits(other.minimumPrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.bids, other.bids)) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+   
     
     
 }

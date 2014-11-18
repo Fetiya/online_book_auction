@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost/book_auction</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Pass@deliver</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <!--property name="connection.pool_size">1</property-->
+
+        <!-- SQL dialect -->
+<!--       <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+<property name="hibernate.connection.url">jdbc:derby://localhost:1527/book_auction</property>
+<property name="hibernate.connection.username">root</property>
+<property name="hibernate.connection.password">root</property>-->
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+		
+		<!-- Enable Hibernate's Transaction Factory -->
+        <!--property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactonFactory</property-->
+
+        <!-- Disable the second-level cache  -->
+        <!--property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property-->
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <!--property name="hbm2ddl.auto">create</property>
+
+        <mapping resource="events/Event.hbm.xml"/>
+        <mapping resource="events/Person.hbm.xml"/-->
+
+    </session-factory>
+
+</hibernate-configuration>
