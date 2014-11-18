@@ -52,7 +52,8 @@ public class DepartmentBean implements Serializable {
     }
 
     public List<Department> getDepartments() {
-        return departmentDAO.getAllDepartments();
+//        return departmentDAO.getAllDepartments();
+        return null;
     }
 
     public void setDepartments(List<Department> departments) {
