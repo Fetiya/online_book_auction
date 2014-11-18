@@ -7,10 +7,10 @@ package mum.auction.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,7 +39,7 @@ public class Book {
     private String edition;
     private String pictureURL;
     
-    @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Auction> auctionList ;
     
     
@@ -73,14 +73,7 @@ public class Book {
     }
 
    
- 
-
   
-
-  
-
-
- 
 
     public Long getId() {
         return id;

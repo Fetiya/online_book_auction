@@ -8,53 +8,77 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+
+        <h3> Add New Auction</h3>
         <h:form>
 
-            <h:panelGrid columns="2" cellpadding="5">
-
-                <h:outputLabel value="Book Title" for="bookTitle" />
-                <p:autoComplete id="bookTitle" value="#{auctionBn.auction.book.title}" 
-                                completeMethod="#{auctionBn.completeTitle()}" />
-
-                
-                 <p:message  id="errorBookTitle"  for="bookTitle" />
-                 
-                 
-                 
-                StartDate  <p:outputLabel  for="startDate" value="#{msgs.auctionStartDate}" />
-                
-                <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"
-                            required="true"                  
-                    validator="#{auctionBn.validateStartDate}">
-                 
-                       <p:ajax event="change" update="errorStartDate"/>
-                </p:calendar>
-                        
-                
- 
-                <p:message  id="errorStartDate"  for="startDate" />
-              
-                
-                
-                EndDate   <p:outputLabel for="endDate" value="#{msgs.auctionEndDate}" />
-                <p:calendar id="endDate" value="#{auctionBn.auction.endDate}" required="true"
-                    validator="#{auctionBn.validateEndDate}">
-                 
-                       <p:ajax event="change" update="errorEndDate"/>
-                </p:calendar>
-                
-                <p:message id="errorEndDate" for="endDate" style="color: red"/>
-
-                MinimumBid <p:outputLabel for="price" value="#{msgs.minimumBid}"  />
-                <p:inputText  id="price" value="#{auctionBn.auction.minimumPrice}" required="true">
-                    <f:validateDoubleRange minimum="0" />
-                </p:inputText>
-                <p:message id="errorPrice" for="price" style="color: red" />
+            <table cellpadding="5">
+                <tr>
+                    <td>
+                        <h:outputLabel value="Book Title" for="bookTitle" /></td>
+                    <td>
+                        <!--                        <p:autoComplete id="bookTitle" value="# {auctionBn.auction.book.title}" 
+                                                                completeMethod="# {auctionBn.completeTitle()}" />-->
 
 
-            </h:panelGrid>
+                        <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" >
+                            <f:selectItems value="#{auctionBn.books}" var="book" itemValue="#{book.id}" itemLabel="#{book.title}" />
 
-            <h:commandButton action="#{auctionBn.addAuction()}"
+                        </h:selectOneMenu>
+
+                        <h:message for="brands" style="color:red-;" />
+
+                    </td>
+                    <td>
+                        <!--<p:message  id="errorBookTitle"  for="bookTitle" />--></td>
+                </tr>
+                <tr><td>
+
+
+                        <p:outputLabel  for="startDate" value="StartDate" /></td>
+                    <td>
+
+                        <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"
+                                    required="true"                  
+                                    validator="#{auctionBn.validateStartDate}">
+
+                            <p:ajax event="change" update="errorStartDate"/>
+                        </p:calendar>
+                    </td>
+                    <td>
+                        <p:message  id="errorStartDate"  for="startDate" />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td><p:outputLabel for="endDate" value="Auction end date" /></td>
+                    <td>
+                        <p:calendar id="endDate" value="#{auctionBn.auction.endDate}" required="true"
+                                    validator="#{auctionBn.validateEndDate}">
+
+                            <p:ajax event="change" update="errorEndDate"/>
+                        </p:calendar>
+                    </td>
+                    <td>
+                        <p:message id="errorEndDate" for="endDate" style="color: red"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p:outputLabel for="price" value="Minimum Bid price($)"  /></td>
+                    <td>
+                        <p:inputText  id="price" value="#{auctionBn.auction.minimumPrice}" required="true">
+                            <f:validateDoubleRange minimum="0" />
+                        </p:inputText></td>
+                    <td>
+                        <p:message id="errorPrice" for="price" style="color: red" />
+                    </td>
+                </tr>
+            </table>
+
+
+            <h:commandButton action="#{auctionBn.addAuction}"
                              value ="Add New Auction"/>
         </h:form>
     </h:body>
