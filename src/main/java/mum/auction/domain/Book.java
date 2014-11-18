@@ -12,8 +12,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 
 /**
  *
@@ -22,34 +23,46 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
-    
+   
     
     @Id
     @GeneratedValue
     private Long id;
+
     private String title;
     private String description;
     private String author;
     private String publisher;
     private String edition;
+
     
-      @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
     private List<Auction> auctionList ;
     
     
-    public Book()
-    {
-        
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category caterogy;
+ 
+
+    public Book() {
+
     }
 
-    public Book(String title, String description, String author, String publisher, String edition, List<Auction> auctionList) {
+    public Book(String title, String description, String author, String publisher, String edition, List<Auction> auctionList, Category caterogy) {
         this.title = title;
         this.description = description;
         this.author = author;
         this.publisher = publisher;
         this.edition = edition;
         this.auctionList = auctionList;
+        this.caterogy = caterogy;
     }
+
+  
+
+
+ 
 
     public Long getId() {
         return id;
@@ -59,13 +72,6 @@ public class Book {
         this.id = id;
     }
 
-  
-    
-    
-
- 
-    
-    
     
 
     /**
@@ -137,6 +143,14 @@ public class Book {
         this.edition = edition;
     }
 
+    public Category getCaterogy() {
+        return caterogy;
+    }
+
+    public void setCaterogy(Category caterogy) {
+        this.caterogy = caterogy;
+    }
+
     /**
      * @return the auctionList
      */
@@ -153,14 +167,14 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.title);
-        hash = 53 * hash + Objects.hashCode(this.description);
-        hash = 53 * hash + Objects.hashCode(this.author);
-        hash = 53 * hash + Objects.hashCode(this.publisher);
-        hash = 53 * hash + Objects.hashCode(this.edition);
-        hash = 53 * hash + Objects.hashCode(this.auctionList);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.title);
+        hash = 79 * hash + Objects.hashCode(this.description);
+        hash = 79 * hash + Objects.hashCode(this.author);
+        hash = 79 * hash + Objects.hashCode(this.publisher);
+        hash = 79 * hash + Objects.hashCode(this.edition);
+        hash = 79 * hash + Objects.hashCode(this.auctionList);
+        hash = 79 * hash + Objects.hashCode(this.caterogy);
         return hash;
     }
 
@@ -173,9 +187,6 @@ public class Book {
             return false;
         }
         final Book other = (Book) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
@@ -194,9 +205,12 @@ public class Book {
         if (!Objects.equals(this.auctionList, other.auctionList)) {
             return false;
         }
+        if (!Objects.equals(this.caterogy, other.caterogy)) {
+            return false;
+        }
         return true;
     }
 
    
-    
+
 }

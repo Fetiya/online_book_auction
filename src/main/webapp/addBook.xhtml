@@ -10,7 +10,7 @@
         <h2>#{msgs.bookHeader}</h2>
        
         <h:form>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3">
                 
                 #{msgs.bookTitle}
                 <h:inputText  id="title" value="#{bookBn.book.title}"
@@ -24,12 +24,12 @@
                 <h:inputTextarea id="desc" value="#{bookBn.book.desc}"
                                  validator="#{bookBn.validateBookDescription}">
                        <f:ajax event="change" render="descError"/>
-                </h:inputText>       
+                </h:inputTextarea>       
                 <h:message id="descError" for="desc" style="color: red"/>
                 
      
                 #{msgs.bookAuth}
-                <h:inputTextarea id="auth" value="#{bookBn.book.author}"
+                <h:inputText id="auth" value="#{bookBn.book.author}"
                                  validator="#{bookBn.validateBookAuthor}">
                        <f:ajax event="change" render="authError"/>
                 </h:inputText>       
@@ -37,7 +37,7 @@
                 
                 
                 #{msgs.bookPub}
-                <h:inputTextarea id="pub" value="#{bookBn.book.publisher}"
+                <h:inputText id="pub" value="#{bookBn.book.publisher}"
                                  validator="#{bookBn.validateBookPublisher}">
                        <f:ajax event="change" render="pubError"/>
                 </h:inputText>       
@@ -45,7 +45,7 @@
                 
                 
                 #{msgs.bookEdit}
-                <h:inputTextarea id="edition" value="#{bookBn.book.edition}"
+                <h:inputText id="edition" value="#{bookBn.book.edition}"
                                  validator="#{bookBn.validateBookEdition}">
                        <f:ajax event="change" render="editionError"/>
                 </h:inputText>       
@@ -55,7 +55,7 @@
             </h:panelGrid> 
             
             <p>
-                <h:commandButton value="#{msgs.addBook}" action="#{bookBn.addBook}"  />       
+                <h:commandButton value="#{msgs.addBook}" action="#{bookBn.addBook}"  />  </p>     
         </h:form>
         
     </h:body>
