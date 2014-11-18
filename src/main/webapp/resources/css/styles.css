@@ -262,6 +262,13 @@ img {
     padding: 10px;
     border: 1px solid #333;
 }
+.templatemo_product_box3 {
+    float: left;
+    width: 600px;
+    height: 600 px;
+    padding: 10px;
+    border: 1px solid #333;
+}
 
 #templatemo_content_right h1 {
     padding: 10px;
@@ -314,10 +321,18 @@ img {
     float: left;
     margin-right: 20px;
 }
+.templatemo_product_box3 img {
+    float: left;
+    margin-right: 20px;
+}
 
 .templatemo_product_box .product_info {
     float: left;
     width: 180px;
+}
+.templatemo_product_box3 .product_info {
+    float: left;
+    width: 240px;
 }
 
 .product_info p {
