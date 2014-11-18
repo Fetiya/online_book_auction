@@ -25,14 +25,14 @@ public class User {
     private String firstName;
     private String lastName;
     private String studentId;
-    private String department;
+    private Department department;
     private String email;
     private String userName;
     private String password;
     
     List<Auction> auctions= new ArrayList<Auction>();
 
-    public User(String firstName, String lastName, String studentId, String department, String email, String userName, String password) {
+    public User(String firstName, String lastName, String studentId, Department department, String email, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.studentId = studentId;
@@ -74,11 +74,11 @@ public class User {
         this.studentId = studentId;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 

@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import mum.auction.domain.Department;
 import mum.auction.domain.User;
 
 /**
@@ -32,7 +33,7 @@ public class UserBean  implements Serializable{
     private String firstName;
     private String lastName;
     private String studentId;
-    private String department;
+    private Department department;
     private String email;
     private String userName;
     private String password;
@@ -61,11 +62,11 @@ public class UserBean  implements Serializable{
         this.studentId = studentId;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
