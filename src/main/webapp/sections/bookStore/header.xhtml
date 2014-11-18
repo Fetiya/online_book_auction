@@ -29,8 +29,8 @@ and open the template in the editor.
         <div id="templatemo_header">
             <div id="templatemo_special_offers">
                 <h:form>
-                    <p:autoComplete id="acSimple" value="#{book.book.title}" completeMethod="#{autoCompleteView.completeText}" style=" background-color: #212120; " />
-                    <div class="buy_now_button"><a href="subpage.html">Search</a></div>
+                    <p:autoComplete id="acSimple" value="#{book.book.title}" completeMethod="#{autoCompleteView.completeText}" style=" background-color: #212120; " /><br/><br/>
+                    <div class="buy_now_button"><h:link  value="Search" outcome="home.xhtml"/></div>
                 </h:form>
             </div>
 

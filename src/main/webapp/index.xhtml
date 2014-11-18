@@ -21,30 +21,31 @@ and open the template in the editor.
 
             <div id="templatemo_header">
                 <div id="templatemo_special_offers">
-                   <h:form>
+                    <h:form>
                         <h:panelGrid columns="2">
                             <h:outputText value="User name "/> 
                             <h:inputText value="#{user.userName}"/>
                             <h:outputText value="Password "/> 
                             <h:inputSecret value="#{user.password}"/>
-                            <h:commandButton class="buy_now_button2" value="Login" action="#{user.login()}" />
-                            <h:commandButton class="buy_now_button2" id="signup" value="Sign up" action="signUp"/>
+                            <h:link class="buy_now_button2"  value="Login" outcome="#{user.login()}"/>
+                            <h:link class="buy_now_button2"  value="Sign Up" outcome="signUp"/>
+
                         </h:panelGrid>
                     </h:form>
                 </div>
-                
-        <!--        <div id="templatemo_new_books">
-                        <ul>
-                        <li>Suspen disse</li>
-                        <li>Maece nas metus</li>
-                        <li>In sed risus ac feli</li>
-                    </ul>
-                    <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
-                </div>
 
-            </div>
-            <div id="templatemo_content_right" >
-                
-        </div>--></div>
-          </div> </body>
+                <!--        <div id="templatemo_new_books">
+                                <ul>
+                                <li>Suspen disse</li>
+                                <li>Maece nas metus</li>
+                                <li>In sed risus ac feli</li>
+                            </ul>
+                            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
+                        </div>
+        
+                    </div>
+                    <div id="templatemo_content_right" >
+                        
+                </div>--></div>
+        </div> </body>
 </html>
