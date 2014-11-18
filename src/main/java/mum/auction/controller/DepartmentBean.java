@@ -31,6 +31,7 @@ public class DepartmentBean implements Serializable {
 
     private DepartmentDAO departmentDAO = new DepartmentDAOImpl();
     private Department department= new Department();
+    private List<Department> departments = new ArrayList<Department>();
 
     public Department getDepartment() {
         return department;
@@ -48,6 +49,14 @@ public class DepartmentBean implements Serializable {
 
     public void canceDepartment() {
         departmentDAO.removeDepartment(department);
+    }
+
+    public List<Department> getDepartments() {
+        return departmentDAO.getAllDepartments();
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
     }
 
     public List<String> completeTitle() {

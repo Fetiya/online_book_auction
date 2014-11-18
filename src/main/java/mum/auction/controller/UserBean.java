@@ -25,7 +25,7 @@ import mum.auction.domain.User;
  * @author Fetiya
  */
 
-@Named("user")
+@Named("userBn")
 @SessionScoped
 public class UserBean  implements Serializable{
     
