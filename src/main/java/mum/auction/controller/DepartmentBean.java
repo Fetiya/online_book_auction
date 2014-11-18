@@ -11,13 +11,13 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import mum.auction.dao.impl.AuctionDAOImpl;
-import mum.auction.dao.impl.CategoryDAOImpl;
+import mum.auction.dao.impl.BookCategoryDAOImpl;
 import mum.auction.dao.impl.DepartmentDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
-import mum.auction.dao.intr.CategoryDAO;
+import mum.auction.dao.intr.BookCategoryDAO;
 import mum.auction.dao.intr.DepartmentDAO;
 import mum.auction.domain.Auction;
-import mum.auction.domain.Category;
+import mum.auction.domain.BookCategory;
 import mum.auction.domain.Department;
 
 /**
@@ -41,13 +41,13 @@ public class DepartmentBean implements Serializable {
     }
 
     public String addDepartment() {
-        departmentDAO.addDepartment(department);
+  //      departmentDAO.addDepartment(department);
         
         return "index";
     }
 
     public void canceDepartment() {
-        departmentDAO.removeDepartment(department);
+    //    departmentDAO.removeDepartment(department);
     }
 
     public List<String> completeTitle() {

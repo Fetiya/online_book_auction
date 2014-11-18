@@ -37,33 +37,45 @@ public class Book {
     private String author;
     private String publisher;
     private String edition;
-
-
+    private String pictureURL;
     
     @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
     private List<Auction> auctionList ;
     
     
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category caterogy;
+    @JoinColumn(name = "bookCategory_id")
+    private BookCategory bookCategory;
  
 
     public Book() {
 
     }
 
-
-    public Book(String title, String description, String author, String publisher, String edition, List<Auction> auctionList, Category caterogy) {
-
+    public Book(String title, String description, String author, String publisher, String edition, String pictureURL, List<Auction> auctionList, BookCategory bookCategory) {
         this.title = title;
         this.description = description;
         this.author = author;
         this.publisher = publisher;
         this.edition = edition;
+        this.pictureURL = pictureURL;
         this.auctionList = auctionList;
-        this.caterogy = caterogy;
+        this.bookCategory = bookCategory;
     }
+
+  
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+
+   
+ 
+
+  
 
   
 
@@ -149,13 +161,16 @@ public class Book {
         this.edition = edition;
     }
 
-    public Category getCaterogy() {
-        return caterogy;
+    public BookCategory getBookCategory() {
+        return bookCategory;
     }
 
-    public void setCaterogy(Category caterogy) {
-        this.caterogy = caterogy;
+    public void setBookCategory(BookCategory bookCategory) {
+        this.bookCategory = bookCategory;
     }
+
+ 
+  
 
     /**
      * @return the auctionList
@@ -173,14 +188,15 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.title);
-        hash = 79 * hash + Objects.hashCode(this.description);
-        hash = 79 * hash + Objects.hashCode(this.author);
-        hash = 79 * hash + Objects.hashCode(this.publisher);
-        hash = 79 * hash + Objects.hashCode(this.edition);
-        hash = 79 * hash + Objects.hashCode(this.auctionList);
-        hash = 79 * hash + Objects.hashCode(this.caterogy);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.title);
+        hash = 67 * hash + Objects.hashCode(this.description);
+        hash = 67 * hash + Objects.hashCode(this.author);
+        hash = 67 * hash + Objects.hashCode(this.publisher);
+        hash = 67 * hash + Objects.hashCode(this.edition);
+        hash = 67 * hash + Objects.hashCode(this.pictureURL);
+        hash = 67 * hash + Objects.hashCode(this.auctionList);
+        hash = 67 * hash + Objects.hashCode(this.bookCategory);
         return hash;
     }
 
@@ -208,14 +224,20 @@ public class Book {
         if (!Objects.equals(this.edition, other.edition)) {
             return false;
         }
+        if (!Objects.equals(this.pictureURL, other.pictureURL)) {
+            return false;
+        }
         if (!Objects.equals(this.auctionList, other.auctionList)) {
             return false;
         }
-        if (!Objects.equals(this.caterogy, other.caterogy)) {
+        if (!Objects.equals(this.bookCategory, other.bookCategory)) {
             return false;
         }
         return true;
     }
+
+   
+    
 
 
 }

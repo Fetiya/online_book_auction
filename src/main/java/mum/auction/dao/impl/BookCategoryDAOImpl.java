@@ -6,20 +6,21 @@
 package mum.auction.dao.impl;
 
 import java.util.List;
-import mum.auction.dao.intr.AuctionDAO;
+import mum.auction.dao.intr.BookCategoryDAO;
 import mum.auction.dao.intr.DepartmentDAO;
 import mum.auction.dao.intr.HibernateDAO;
-import mum.auction.domain.Auction;
-import mum.auction.domain.Department;
+import mum.auction.domain.BookCategory;
+
 
 /**
  *
  * @author hiwot
  */
-public class DepartmentDAOImpl extends HibernateDAO<Department, Long> implements DepartmentDAO
+
+public class BookCategoryDAOImpl extends HibernateDAO<BookCategory, Long> implements BookCategoryDAO
 {
-	public DepartmentDAOImpl()
+	public BookCategoryDAOImpl()
 	{
-		super(Department.class);
+		super(BookCategory.class);
 	}
 }

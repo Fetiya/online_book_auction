@@ -32,7 +32,8 @@ public class HibernateUtil
 		config.addAnnotatedClass(Auction.class);
 		config.addAnnotatedClass(Bid.class);
 		config.addAnnotatedClass(User.class);
-		
+		config.addAnnotatedClass(Department.class);
+                config.addAnnotatedClass(BookCategory.class);
 		config.configure();
 		
 		return config;

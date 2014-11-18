@@ -6,30 +6,35 @@
 package mum.auction.controller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-//mport mum.auction.dao.impl.AuctionDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
-import mum.auction.dao.intr.BookDAO;
 import mum.auction.dao.intr.DAOFactory;
 import mum.auction.domain.Auction;
+
+
 
 /**
  *
  * @author Fetiya
  */
-
 @Named("auctionBn")
 @SessionScoped
 public class AuctionBean implements Serializable {
 
-  private AuctionDAO auctionDAO;
-  private Auction auction= new Auction();
+    private Auction auction = new Auction();
 
-  
-  private DAOFactory  factory=DAOFactory.getFactory();
+    private DAOFactory factory = DAOFactory.getFactory();
+
     public Auction getAuction() {
         return auction;
     }
@@ -39,18 +44,73 @@ public class AuctionBean implements Serializable {
     }
 
     public String addAuction() {
-       AuctionDAO auctionDao = factory.getAuctionDAO();
-        
+
+        computeAuctionStatus();
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+
         auctionDao.beginTransaction();
         auctionDao.save(auction);
         auctionDao.commitTransaction();
+
+        return "auctionConfirmation";
+    }
+
+    public void computeAuctionStatus() {
+        Date today = new Date();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+
+        if (fmt.format(today).equals(fmt.format(auction.getStartDate()))) {
+            auction.setStatus(Auction.statusType.OPEN);
+        } else if (auction.getStartDate().after(today)) {
+            auction.setStatus(Auction.statusType.PENDING);
+
+        } else {
+            auction.setStatus(Auction.statusType.OPEN);
+        }
+    }
+    
+  public void validateStartDate(FacesContext fc, UIComponent component, Object value) {
+
+
+            Date startDate = (Date) value;
+
+            
+            if (startDate.before(new Date())) {
+                throw new ValidatorException(
+                        new FacesMessage("Start date should be current or valid future date"));
+
+            } 
         
-        return "index.html";
+    }
+
+
+    public void validateEndDate(FacesContext fc, UIComponent component, Object value) {
+
+//        if (((String) value).equals("")) {
+//            throw new ValidatorException(
+//                    new FacesMessage("Please provide an auction end date"));
+//        } else {
+
+            Date endDate = (Date) value;
+
+            UIInput startDateInput = (UIInput) component.findComponent("startDate");
+
+            Date startDate = ((Date) startDateInput.getLocalValue());
+
+            if (endDate.before(new Date())) {
+                throw new ValidatorException(
+                        new FacesMessage("End date should be current or valid future date"));
+
+            } else if (endDate.before(startDate)) {
+                throw new ValidatorException(
+                        new FacesMessage("Auction end date should be later than start date"));
+            }
+//        }
     }
 
     public void cancelAuction() {
-    //   auctionDAO.removeAuction(auction);
-}
+        //   auctionDAO.removeAuction(auction);
+    }
 
     public List<String> completeTitle() {
         String query = null;
@@ -62,4 +122,6 @@ public class AuctionBean implements Serializable {
         return results;
 
     }
+    
+        
 }

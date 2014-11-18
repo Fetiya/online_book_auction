@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,18 +40,27 @@ public class Auction {
     private Date startDate;
     private Date endDate;
     private double minimumPrice;
-    private String status;
+    
+     public enum statusType{
+        PENDING,OPEN,CLOSED,CANCELLED;
+    }
+    
+    @Enumerated(EnumType.STRING)
+    private statusType status;
+    
+  
     
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
     @OneToMany(mappedBy = "auction",cascade = CascadeType.ALL)
     private List<Bid> bids;
 
     public Auction() {
     }
 
-    public Auction(Book book, Date startDate, Date endDate, double minimumPrice, String status, User user, List<Bid> bids) {
+    public Auction(Book book, Date startDate, Date endDate, double minimumPrice, statusType status, User user, List<Bid> bids) {
         this.book = book;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -59,6 +70,7 @@ public class Auction {
         this.bids = bids;
     }
 
+   
 
     
     public Long getId() {
@@ -76,18 +88,16 @@ public class Auction {
     public void setBids(List<Bid> bids) {
         this.bids = bids;
     }
-    
-    
-    
-    
-    
-    public String getStatus() {
+
+    public statusType getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(statusType status) {
         this.status = status;
     }
+    
+    
     
     public User getUser() {
         return user;
@@ -132,14 +142,14 @@ public class Auction {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.book);
-        hash = 79 * hash + Objects.hashCode(this.startDate);
-        hash = 79 * hash + Objects.hashCode(this.endDate);
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.minimumPrice) ^ (Double.doubleToLongBits(this.minimumPrice) >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.status);
-        hash = 79 * hash + Objects.hashCode(this.user);
-        hash = 79 * hash + Objects.hashCode(this.bids);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.book);
+        hash = 61 * hash + Objects.hashCode(this.startDate);
+        hash = 61 * hash + Objects.hashCode(this.endDate);
+        hash = 61 * hash + (int) (Double.doubleToLongBits(this.minimumPrice) ^ (Double.doubleToLongBits(this.minimumPrice) >>> 32));
+        hash = 61 * hash + Objects.hashCode(this.status);
+        hash = 61 * hash + Objects.hashCode(this.user);
+        hash = 61 * hash + Objects.hashCode(this.bids);
         return hash;
     }
 
@@ -164,7 +174,7 @@ public class Auction {
         if (Double.doubleToLongBits(this.minimumPrice) != Double.doubleToLongBits(other.minimumPrice)) {
             return false;
         }
-        if (!Objects.equals(this.status, other.status)) {
+        if (this.status != other.status) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {
@@ -176,7 +186,7 @@ public class Auction {
         return true;
     }
 
-
+  
 
    
     

@@ -23,29 +23,26 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
-public class Category {
+public class BookCategory {
   
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     
     
     private String name;
     
-   @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL)
-    private List<Book> books = new ArrayList<Book>();
+    @OneToMany(mappedBy = "bookCategory",  cascade = CascadeType.ALL)
+    private List<Book> books;// = new ArrayList<Book>();
 
-    public Category(Long id, String name) {
+    public BookCategory(Long id, String nam) {
         this.id = id;
         this.name = name;
     }
 
-    public Category() {
+    public BookCategory() {
     }
 
-   
-   
-   
     public String getName() {
         return name;
     }
@@ -53,6 +50,11 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+   
+   
+   
+   
 
     public List<Book> getBooks() {
         return books;
@@ -70,31 +72,12 @@ public class Category {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.books);
-        return hash;
+    public BookCategory(String name, List<Book> books) {
+        this.name = name;
+        this.books = books;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Category other = (Category) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.books, other.books)) {
-            return false;
-        }
-        return true;
-    }
+   
     
     
 }

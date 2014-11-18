@@ -7,14 +7,15 @@
 package mum.auction.dao.intr;
 
 import java.util.List;
-import mum.auction.domain.Department;
+import mum.auction.domain.BookCategory;
+
 
 
 /**
  *
  * @author Fetiya
  */
-public interface  DepartmentDAO extends GenericDAO<Department, Long>
+public interface  BookCategoryDAO extends GenericDAO<BookCategory, Long>
 {
 	
 }
