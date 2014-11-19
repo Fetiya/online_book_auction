@@ -269,7 +269,13 @@ img {
     padding: 10px;
     border: 1px solid #333;
 }
-
+.templatemo_product_box4 {
+    margin-left: 150px;
+    width: 303px;
+    height: 100 px;
+    padding: 10px;
+    border: 1px solid #333;
+}
 #templatemo_content_right h1 {
     padding: 10px;
     margin: 0 0 20px 0;
@@ -277,7 +283,18 @@ img {
     color: #cbc750;
     background: url(images/templatemo_h1_bg.jpg);
 }
-
+table{
+    border: 1px solid #333;
+}
+td{
+    border-bottom: 1px solid #333;
+    width: 200px;
+    text-align: center
+}
+th{
+    color: #969547;
+    background: url(images/templatemo_menu_bg.jpg) no-repeat;
+}
 #templatemo_content_right h2 {
     padding: 0 0 0 0;
     margin: 0 0 20px 0;
@@ -343,6 +360,9 @@ img {
 
 /* footer */
 #templatemo_footer {
+    margin-bottom: 10px;
+    
+    position: relative;
     clear: both;
     width: 960px;
     padding: 20px 0px 20px 0;

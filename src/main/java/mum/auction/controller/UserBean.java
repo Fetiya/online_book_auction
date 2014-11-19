@@ -49,7 +49,17 @@ public class UserBean implements Serializable {
     private String password;
     private Long selectedId;
 
+    private Long loggedUserId;
+
     private DAOFactory factory = DAOFactory.getFactory();
+
+    public Long getLoggedUserId() {
+        return loggedUserId;
+    }
+
+    public void setLoggedUserId(Long loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
 
     public Long getSelectedId() {
         return selectedId;
@@ -165,6 +175,11 @@ public class UserBean implements Serializable {
         userDao.commitTransaction();
         for (User u : users) {
             if (user.getUserName().equals(u.getUserName())) {
+                if (user.getPassword().equals(u.getPassword())) {
+                    loggedUserId = u.getId();
+                    loggedIn = true;
+                    return "home";
+                }
                 loggedIn = true;
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getSessionMap().put("LoggedInUser", u);

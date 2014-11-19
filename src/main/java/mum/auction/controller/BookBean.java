@@ -7,6 +7,7 @@ package mum.auction.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
@@ -158,6 +159,18 @@ public class BookBean implements Serializable {
         List<Book> books = bookDao.findAll(0, 10);
         bookDao.commitTransaction();
         return books;
+    }
+ public List<String> fetchBookTitles() {
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+        List<Book> books = bookDao.findAll(0, 10);
+        bookDao.commitTransaction();
+        List<String> bookTitles = new ArrayList();
+        for(Book b:books){
+            bookTitles.add(b.getTitle());
+                    }
+        return bookTitles;
     }
 
     public String getBookByID(Long id) {

@@ -80,7 +80,7 @@ public class Bid  {
         return offeredPrice;
     }
 
-    public void setOfferedPrice(int offeredPrice) {
+    public void setOfferedPrice(double offeredPrice) {
         this.offeredPrice = offeredPrice;
     }
 

@@ -25,7 +25,8 @@ and open the template in the editor.
                 <li><a href="openAuctions.xhtml">View  Open Auctions</a></li> 
                 <li><a href="viewBids.xhtml">View Bids</a></li> 
                 <li><a href="addBook.xhtml">Add Book</a></li> 
-                <li><a href="auction.xhtml">Auction Status</a></li>                         
+                <li><a href="auction.xhtml">Auction Status</a></li> 
+                <li><a href="viewBooks.xhtml">View Bids</a></li>  
                 <li><a href="aboutUs.xhtml">About Us</a></li>  
                 <li><a href="index.xhtml">Logout</a></li> 
             </ul>
@@ -34,7 +35,7 @@ and open the template in the editor.
         <div id="templatemo_header">
             <div id="templatemo_special_offers">
                 <h:form>
-                    <p:autoComplete id="acSimple" value="#{book.book.title}" completeMethod="#{autoCompleteView.completeText}" style=" background-color: #212120; " /><br/><br/>
+                    <p:autoComplete id="acSimple"  value="#{book.book.title}" completeMethod="#{bookBn.fetchBooks()}" style=" background-color: #212120; " /><br/><br/>
                     <div class="buy_now_button"><h:link  value="Search" outcome="home.xhtml"/></div>
                 </h:form>
             </div>
