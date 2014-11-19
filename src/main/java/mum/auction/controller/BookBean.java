@@ -14,13 +14,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-
-import mum.auction.domain.Book;
-import mum.auction.dao.intr.BookDAO;
-
-import mum.auction.dao.intr.*;
 import mum.auction.dao.impl.*;
-import mum.auction.domain.Auction;
+import mum.auction.dao.intr.*;
+import mum.auction.dao.intr.BookDAO;
+import mum.auction.domain.Book;
+import mum.auction.domain.BookCategory;
 
 /**
  *
@@ -32,15 +30,49 @@ public class BookBean implements Serializable {
 
     private Book book = new Book();
     private List<Book> books = new ArrayList<Book>();
-
+    private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
+    private BookCategory category = new BookCategory();
+    
+    private Long selectedCategoryId;
+    
     private DAOFactory factory = DAOFactory.getFactory();
 
+    
+    
+    
+    public BookBean() {
+
+        initBookCategories();
+    }
+
+    public Long getSelectedCategoryId() {
+        return selectedCategoryId;
+    }
+
+    public void setSelectedCategoryId(Long selectedCategoryId) {
+        this.selectedCategoryId = selectedCategoryId;
+    }
+
+    
+
+    
+    
     public Book getBook() {
         return book;
     }
 
+    
+    
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public BookCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(BookCategory category) {
+        this.category = category;
     }
 
     /**
@@ -57,14 +89,27 @@ public class BookBean implements Serializable {
         this.books = books;
     }
 
-    public String addBook() {
+    public List<BookCategory> getBookCategories() {
+        return bookCategories;
+    }
+
+    public void setBookCategories(List<BookCategory> bookCategories) {
+        this.bookCategories = bookCategories;
+    }
+
+    
+    
+    
+    public String  addBook() {
 
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
         bookDao.beginTransaction();
         bookDao.save(book);
         bookDao.commitTransaction();
-        return "confirmBook";
+        
+        return "confirmBook.xhtml";
+
     }
 
     public void validateBookTitle(FacesContext fc, UIComponent c, Object value) {
@@ -100,6 +145,20 @@ public class BookBean implements Serializable {
             throw new ValidatorException(
                     new FacesMessage("Please provide edition"));
         }
+    }
+
+    public void initBookCategories() {
+        BookCategoryDAO categoryDao = factory.getBookCategoryDAO();
+
+        categoryDao.beginTransaction();
+
+        bookCategories =(ArrayList<BookCategory>) categoryDao.findAll(0, 10);
+
+        for (BookCategory b : bookCategories) {
+            System.out.println("Bookcategory" + b.getName());
+        }
+        categoryDao.commitTransaction();
+
     }
 
     public List<Book> fetchBooks() {
