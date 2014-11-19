@@ -228,19 +228,18 @@ public class AuctionBean implements Serializable {
         bookDao.commitTransaction();
 
     }
-    public Book getBookById(Long id)
-    {
+
+    public Book getBookById(Long id) {
         BookDAO bookDao = factory.getBookDAO();
 
         bookDao.beginTransaction();
 
         Book book = (Book) bookDao.findByPrimaryKey(id);
-        
+
         bookDao.commitTransaction();
-        
-        
+
         return book;
-        
+
     }
 
     public void setAuctionSeller() {
@@ -269,24 +268,21 @@ public class AuctionBean implements Serializable {
         auctionDao.beginTransaction();
 
         List<Auction> openAuctions;
-        openAuctions= (List<Auction>) auctionDao.findByCriteria(Restrictions.like("status", Auction.statusType.PENDING));
-   
+        openAuctions = (List<Auction>) auctionDao.findByCriteria(Restrictions.like("status", Auction.statusType.PENDING));
+
         auctionDao.commitTransaction();
-       
+
         return openAuctions;
     }
-    
-    
+
     @SuppressWarnings("empty-statement")
     public void getBookDetail(FacesContext fc, UIComponent c, Object value) {
 
-        Long a = (Long)value;
+        Long a = (Long) value;
         System.out.println("a");
-        Book book= getBookById((Long)value);
-         auction.setBook(book);
-          
-         
-   
+        Book book = getBookById((Long) value);
+       // auction.setBook(book);
+
     }
 
 }

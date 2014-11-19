@@ -51,10 +51,6 @@ public class BookCategory {
         this.name = name;
     }
 
-   
-   
-   
-   
 
     public List<Book> getBooks() {
         return books;

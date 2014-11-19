@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>MUM book auction</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+
+
+            <ui:define name="content">
+                <div id="templatemo_content_right">
+                    <h:form>
+                        <div class="templatemo_product_box3">
+                            <h1></h1>
+                          
+                            <div class="product_info">
+                                <p></p>
+                                <h3>Bids</h3>
+                                <h:dataTable value="#{bookBn.book.auctionList}" var="auction">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Edition"
+                                                          style="font-weight: bold"/>
+                                        </f:facet>
+
+                                        <h:outputText value="Edition #{auction.book.edition}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Minimum Price"
+                                                          style="font-weight: bold"/>
+                                        </f:facet>
+
+                                        <h:outputText value="Edition #{auction.minimumPrice}" />
+                                    </h:column>
+                                </h:dataTable>
+                                <h:outputText value="Enter bid"/>
+                                <h:inputText value=""/><br/><br/>
+                                <div class="buy_now_button2">
+                                    <h:commandLink  value="Bid" action="regstered.xhtml"/>
+                                    </div>
+
+                            </div>
+                            <div class="cleaner"></div>
+                        </div>
+                    </h:form>
+                </div> 
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
