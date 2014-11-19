@@ -51,37 +51,40 @@ and open the template in the editor.
                     <h:form  id="showSignUp">
                         <h:panelGrid columns="3">
                             <p:outputLabel value="First Name: "/>
-                            <p:inputText id="first" value="#{userBn.firstName}" validator="#{user.validateFirstName}">
+                            <p:inputText id="first" value="#{userBn.user.firstName}" validator="#{userBn.validateFirstName}">
                                 <f:ajax event="blur" render="firstError"/>
                             </p:inputText>
                             <h:message for="first" id="firstError" style="color: yellow"/>
                             <p:outputLabel value="Last Name: "/>
-                            <p:inputText id="last" value="#{userBn.lastName}" validator="#{user.validateLastName}">
+                            <p:inputText id="last" value="#{userBn.user.lastName}" validator="#{userBn.validateLastName}">
                                 <f:ajax event="blur" render="lastError"/>
                             </p:inputText>
                             <h:message for="last"  id="lastError" style="color: yellow"/>
                             <p:outputLabel value="Studnet ID: "/>
-                            <p:inputText id="sid" value="#{userBn.studentId}" validator="#{user.validateStudentId}">
+                            <p:inputText id="sid" value="#{userBn.user.studentId}" validator="#{userBn.validateStudentId}">
                                 <f:ajax event="blur" render="studentError"/>
                             </p:inputText>
                             <h:message for="sid"  id="studentError" style="color: yellow"/>
                             <p:outputLabel value="Department: "/>
-                            <p:selectOneMenu id="dep" value="#{department.department}"/>
-                            
+                            <h:selectOneMenu id="dep" value="#{userBn.selectedId}" >
+                                <f:selectItems value="#{departmentBn.departments}" var="dep" itemValue="#{dep.id}" itemLabel="#{dep.name}" />
+
+                            </h:selectOneMenu>
+
                             <h:message for="dep" style="color: yellow"/>
                             <p:outputLabel value="Email: "/>
-                            <p:inputText id="email" value="#{userBn.email}" validator="#{user.validateEmail}">
+                            <p:inputText id="email" value="#{userBn.user.email}" validator="#{userBn.validateEmail}">
                                 <f:ajax event="blur" render="emailError"/>
                             </p:inputText>
                             <h:message for="email" id="emailError" style="color: yellow"/>
                             <p:outputLabel value="User name: "/>
-                            <p:inputText id="username" value="#{userBn.userName}" validator="#{user.validateUserName}">
+                            <p:inputText id="username" value="#{userBn.userName}" validator="#{userBn.validateUserName}">
                                 <f:ajax event="blur" render="userNameError"/>
                             </p:inputText>
                             <h:message for="username" id="userNameError" style="color: yellow"/>
                             <p:outputLabel value="Password: "/>
                             <p:password id="password" value="#{userBn.password}" />
-                           
+
                             <h:message for="password" style="color: yellow"/>
                             <h:commandButton class="buy_now_button2" value="Sign Up" action="#{userBn.signUp()}"/>
                         </h:panelGrid>

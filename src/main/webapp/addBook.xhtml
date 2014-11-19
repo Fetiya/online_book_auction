@@ -21,7 +21,7 @@
                  
                 
                 #{msgs.bookDesc}
-                <h:inputTextarea id="desc" value="#{bookBn.book.desc}"
+                <h:inputTextarea id="desc" value="#{bookBn.book.description}"
                                  validator="#{bookBn.validateBookDescription}">
                        <f:ajax event="change" render="descError"/>
                 </h:inputTextarea>       

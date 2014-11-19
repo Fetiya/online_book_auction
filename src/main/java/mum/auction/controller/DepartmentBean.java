@@ -15,6 +15,7 @@ import mum.auction.dao.impl.BookCategoryDAOImpl;
 import mum.auction.dao.impl.DepartmentDAOImpl;
 import mum.auction.dao.intr.AuctionDAO;
 import mum.auction.dao.intr.BookCategoryDAO;
+import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.DepartmentDAO;
 import mum.auction.domain.Auction;
 import mum.auction.domain.BookCategory;
@@ -24,14 +25,15 @@ import mum.auction.domain.Department;
  *
  * @author Hiwot
  */
-
-@Named("department")
+@Named("departmentBn")
 @SessionScoped
 public class DepartmentBean implements Serializable {
 
     private DepartmentDAO departmentDAO = new DepartmentDAOImpl();
-    private Department department= new Department();
+    private Department department = new Department();
     private List<Department> departments = new ArrayList<Department>();
+
+    private DAOFactory factory = DAOFactory.getFactory();
 
     public Department getDepartment() {
         return department;
@@ -43,16 +45,24 @@ public class DepartmentBean implements Serializable {
 
     public String addDepartment() {
   //      departmentDAO.addDepartment(department);
-        
+
         return "index";
     }
 
     public void canceDepartment() {
-    //    departmentDAO.removeDepartment(department);
+        //    departmentDAO.removeDepartment(department);
     }
 
+  
     public List<Department> getDepartments() {
-        return departmentDAO.getAllDepartments();
+
+        DepartmentDAO departmentDao = factory.getDepartmentDAO();
+
+        departmentDAO.beginTransaction();
+        departments =departmentDao.findAll(0, 10);
+        departmentDao.commitTransaction();
+
+        return departments;
     }
 
     public void setDepartments(List<Department> departments) {

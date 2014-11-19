@@ -20,17 +20,15 @@ and open the template in the editor.
             <ui:define name="content">
                 <div id="templatemo_content_right">
                     <h:form>
-                        <h:dataTable value="#{userBn.user.auctions}" var="auction">
-                            <h:column>
-                                <h:selectBooleanCheckbox value="false"/></h:column>
+                        <h:dataTable value="#{auctionBn.fetchAuctions()}" var="auction">
+
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Cover"
                                                   style="font-weight: bold"/>
                                 </f:facet>
 
-                                <h:outputText value="#{auction.book.title}" />
-                            </h:column>
+                                <img src="#{auction.book.pictureURL}" alt="image" />                            </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Title"
@@ -39,22 +37,22 @@ and open the template in the editor.
 
                                 <h:outputText value="#{auction.book.title}" />
                             </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Author"
-                                                  style="font-weight: bold"/>
-                                </f:facet>
-
-                                <h:outputText value="#{auction.book.author}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Edition"
-                                                  style="font-weight: bold"/>
-                                </f:facet>
-
-                                <h:outputText value="#{auction.book.edition}" />
-                            </h:column>
+                            <!--                            <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Author"
+                                                                              style="font-weight: bold"/>
+                                                            </f:facet>
+                            
+                                                            <h:outputText value="#{auction.book.author}" />
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Edition"
+                                                                              style="font-weight: bold"/>
+                                                            </f:facet>
+                            
+                                                            <h:outputText value="#{auction.book.edition}" />
+                                                        </h:column>-->
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Minimum Price"
@@ -78,6 +76,33 @@ and open the template in the editor.
                                 </f:facet>
 
                                 <h:outputText value="#{auction.endDate}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+
+                                <h:outputText value="#{auction.endDate}" />
+                            </h:column><h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""
+                                                  style="font-weight: bold"/>
+
+                                </f:facet>
+                                <div class="buy_now_button"> <h:commandLink value="Edit"
+
+                                                                            action="#{auctionBn.cancelAuction(auction)}"/></div>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+                                <div class="buy_now_button"> <h:commandLink value="Cancel"
+
+                                                                            action="#{auctionBn.cancelAuction(auction)}"/></div>
+
                             </h:column>
                         </h:dataTable>
                     </h:form>

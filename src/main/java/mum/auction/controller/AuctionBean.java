@@ -19,9 +19,9 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import mum.auction.dao.intr.AuctionDAO;
 import mum.auction.dao.intr.DAOFactory;
+import mum.auction.dao.intr.UserDAO;
 import mum.auction.domain.Auction;
-
-
+import mum.auction.domain.User;
 
 /**
  *
@@ -68,21 +68,18 @@ public class AuctionBean implements Serializable {
             auction.setStatus(Auction.statusType.OPEN);
         }
     }
-    
-  public void validateStartDate(FacesContext fc, UIComponent component, Object value) {
 
+    public void validateStartDate(FacesContext fc, UIComponent component, Object value) {
 
-            Date startDate = (Date) value;
+        Date startDate = (Date) value;
 
-            
-            if (startDate.before(new Date())) {
-                throw new ValidatorException(
-                        new FacesMessage("Start date should be current or valid future date"));
+        if (startDate.before(new Date())) {
+            throw new ValidatorException(
+                    new FacesMessage("Start date should be current or valid future date"));
 
-            } 
-        
+        }
+
     }
-
 
     public void validateEndDate(FacesContext fc, UIComponent component, Object value) {
 
@@ -90,28 +87,38 @@ public class AuctionBean implements Serializable {
 //            throw new ValidatorException(
 //                    new FacesMessage("Please provide an auction end date"));
 //        } else {
+        Date endDate = (Date) value;
 
-            Date endDate = (Date) value;
+        UIInput startDateInput = (UIInput) component.findComponent("startDate");
 
-            UIInput startDateInput = (UIInput) component.findComponent("startDate");
+        Date startDate = ((Date) startDateInput.getLocalValue());
 
-            Date startDate = ((Date) startDateInput.getLocalValue());
+        if (endDate.before(new Date())) {
+            throw new ValidatorException(
+                    new FacesMessage("End date should be current or valid future date"));
 
-            if (endDate.before(new Date())) {
-                throw new ValidatorException(
-                        new FacesMessage("End date should be current or valid future date"));
-
-            } else if (endDate.before(startDate)) {
-                throw new ValidatorException(
-                        new FacesMessage("Auction end date should be later than start date"));
-            }
+        } else if (endDate.before(startDate)) {
+            throw new ValidatorException(
+                    new FacesMessage("Auction end date should be later than start date"));
+        }
 //        }
     }
 
-    public void cancelAuction() {
-        //   auctionDAO.removeAuction(auction);
-    }
+    public void cancelAuction(Auction auction) {
+        AuctionDAO auctionDao = factory.getAuctionDAO();
 
+        auctionDao.beginTransaction();
+        auctionDao.delete(auction);
+        auctionDao.commitTransaction();
+    }
+ public List<Auction> fetchAuctions() {
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+
+        auctionDao.beginTransaction();
+        List<Auction> auctions=auctionDao.findAll(0, 10);
+        auctionDao.commitTransaction();
+        return auctions;
+    }
     public List<String> completeTitle() {
         String query = null;
         List<String> results = new ArrayList<String>();
@@ -122,6 +129,5 @@ public class AuctionBean implements Serializable {
         return results;
 
     }
-    
-        
+
 }
