@@ -39,7 +39,7 @@ public class Book {
     private String edition;
     private String pictureURL;
     
-    @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "book",  cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Auction> auctionList ;
     
     
