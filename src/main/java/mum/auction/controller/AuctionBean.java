@@ -14,14 +14,15 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import mum.auction.dao.intr.*;
 import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.UserDAO;
-import mum.auction.domain.Auction;
 import mum.auction.domain.*;
+import mum.auction.domain.Auction;
 
 /**
  *
@@ -72,7 +73,7 @@ public class AuctionBean implements Serializable {
 
         getAndSetBookByID();
 
-        String titl = auction.getBook().getTitle();
+        setAuctionSeller();
         computeAuctionStatus();
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -117,7 +118,7 @@ public class AuctionBean implements Serializable {
 //        } else {
         Date endDate = (Date) value;
 
-         //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
+        //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
         //    Date startDate = ((Date) startDateInput.getLocalValue());
 //
         if (endDate.before(new Date())) {
@@ -139,14 +140,16 @@ public class AuctionBean implements Serializable {
         auctionDao.delete(auction);
         auctionDao.commitTransaction();
     }
- public List<Auction> fetchAuctions() {
+
+    public List<Auction> fetchAuctions() {
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
         auctionDao.beginTransaction();
-        List<Auction> auctions=auctionDao.findAll(0, 10);
+        List<Auction> auctions = auctionDao.findAll(0, 10);
         auctionDao.commitTransaction();
         return auctions;
     }
+
     public List<String> completeTitle() {
         String query = null;
         List<String> results = new ArrayList<String>();
@@ -164,27 +167,56 @@ public class AuctionBean implements Serializable {
         bookDao.beginTransaction();
 
         books = bookDao.findAll(0, 10);
-        
-        for ( Book b : books)
-        {
+
+        for (Book b : books) {
             System.out.println("Book" + b.getTitle());
         }
         bookDao.commitTransaction();
 
     }
 
-     public void getAndSetBookByID() {
+    public void getAndSetBookByID() {
 
         BookDAO bookDao = factory.getBookDAO();
 
         bookDao.beginTransaction();
 
-        selectedBook = (Book)bookDao.findByPrimaryKey(bookId);
+        selectedBook = (Book) bookDao.findByPrimaryKey(bookId);
         auction.setBook(selectedBook);
-    
+
         System.out.println("Book Title" + selectedBook.getTitle());
         bookDao.commitTransaction();
 
+    }
+
+    public void setAuctionSeller() {
+        User currentUser = getCurrentUser();
+        auction.setUser(null);
+
+    }
+
+    private User getCurrentUser() {
+        User u = null;
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = fc.getExternalContext();
+        if (externalContext.getUserPrincipal() == null) {
+            System.out.println("current principal is null");
+        } else {
+            Long id = Long.parseLong(externalContext.getUserPrincipal().getName());
+            try {
+
+                UserDAO userDao = factory.getUserDAO();
+
+                userDao.beginTransaction();
+
+                u = (User) userDao.findByPrimaryKey(id);
+                userDao.commitTransaction();
+
+            } catch (Exception ex) {
+
+            }
+        }
+        return u;
     }
 
 }

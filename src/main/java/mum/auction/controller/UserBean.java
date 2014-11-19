@@ -45,6 +45,7 @@ public class UserBean implements Serializable {
     private String password;
     private Long selectedId;
 
+    
     private DAOFactory factory = DAOFactory.getFactory();
 
     public Long getSelectedId() {
@@ -156,7 +157,6 @@ public class UserBean implements Serializable {
 
     public String login() {
         UserDAO userDao = factory.getUserDAO();
-
         userDao.beginTransaction();
         List<User> users = factory.getUserDAO().findAll(0, 100);
         userDao.commitTransaction();
