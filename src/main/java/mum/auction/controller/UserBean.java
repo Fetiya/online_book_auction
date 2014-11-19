@@ -180,6 +180,10 @@ public class UserBean implements Serializable {
                     loggedIn = true;
                     return "home";
                 }
+                loggedIn = true;
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getSessionMap().put("LoggedInUser", u);
+                return "home";
             }
         }
         return "index";
