@@ -161,6 +161,38 @@ public class BookBean implements Serializable {
 
     }
 
+    
+    
+   public String displayBookByCategory(Long id) {
+        BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
+        bookCategoryDao.beginTransaction();
+        category = (BookCategory) bookCategoryDao.findByPrimaryKey(id);
+        
+        System.out.println("book id isi" + category.getBooks());
+//        System.out.println("boook id "+ book.getId());
+        bookCategoryDao.commitTransaction();
+        return "displayBookByCategory.xhtml";
+    }
+    
+    
+    
+    
+     public List<BookCategory> fetchBooksCategory() {
+       BookCategoryDAO categoryDao = factory.getBookCategoryDAO();
+
+        categoryDao.beginTransaction();
+
+        bookCategories =(ArrayList<BookCategory>) categoryDao.findAll(0, 10);
+
+//        for (BookCategory b : bookCategories) {
+//            System.out.println("Bookcategory" + b.getName());
+//        }
+        categoryDao.commitTransaction();
+        return bookCategories;
+    }
+    
+    
+    
     public List<Book> fetchBooks() {
         BookDAO bookDao = factory.getBookDAO();
 
