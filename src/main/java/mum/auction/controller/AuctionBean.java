@@ -17,11 +17,11 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import mum.auction.dao.intr.AuctionDAO;
+import mum.auction.dao.intr.*;
 import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.UserDAO;
 import mum.auction.domain.Auction;
-import mum.auction.domain.User;
+import mum.auction.domain.*;
 
 /**
  *
@@ -33,7 +33,24 @@ public class AuctionBean implements Serializable {
 
     private Auction auction = new Auction();
 
+    private Long bookId;
+    private Book selectedBook;
+
     private DAOFactory factory = DAOFactory.getFactory();
+    private List<Book> books = new ArrayList<Book>();
+
+    public AuctionBean() {
+        setBooks();
+        //   auction.setBook(new Book());
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
 
     public Auction getAuction() {
         return auction;
@@ -43,8 +60,19 @@ public class AuctionBean implements Serializable {
         this.auction = auction;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     public String addAuction() {
 
+        getAndSetBookByID();
+
+        String titl = auction.getBook().getTitle();
         computeAuctionStatus();
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -52,7 +80,7 @@ public class AuctionBean implements Serializable {
         auctionDao.save(auction);
         auctionDao.commitTransaction();
 
-        return "auctionConfirmation";
+        return "auctionConfirmation.xhtml";
     }
 
     public void computeAuctionStatus() {
@@ -89,18 +117,18 @@ public class AuctionBean implements Serializable {
 //        } else {
         Date endDate = (Date) value;
 
-        UIInput startDateInput = (UIInput) component.findComponent("startDate");
-
-        Date startDate = ((Date) startDateInput.getLocalValue());
-
+         //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
+        //    Date startDate = ((Date) startDateInput.getLocalValue());
+//
         if (endDate.before(new Date())) {
             throw new ValidatorException(
                     new FacesMessage("End date should be current or valid future date"));
 
-        } else if (endDate.before(startDate)) {
-            throw new ValidatorException(
-                    new FacesMessage("Auction end date should be later than start date"));
         }
+        //else if (endDate.before(startDate)) {
+//                throw new ValidatorException(
+//                        new FacesMessage("Auction end date should be later than start date"));
+//            }
 //        }
     }
 
@@ -127,6 +155,35 @@ public class AuctionBean implements Serializable {
         }
 
         return results;
+
+    }
+
+    public void setBooks() {
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+
+        books = bookDao.findAll(0, 10);
+        
+        for ( Book b : books)
+        {
+            System.out.println("Book" + b.getTitle());
+        }
+        bookDao.commitTransaction();
+
+    }
+
+     public void getAndSetBookByID() {
+
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+
+        selectedBook = (Book)bookDao.findByPrimaryKey(bookId);
+        auction.setBook(selectedBook);
+    
+        System.out.println("Book Title" + selectedBook.getTitle());
+        bookDao.commitTransaction();
 
     }
 
