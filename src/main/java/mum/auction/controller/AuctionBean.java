@@ -8,8 +8,10 @@ package mum.auction.controller;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -23,6 +25,7 @@ import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.UserDAO;
 import mum.auction.domain.*;
 import mum.auction.domain.Auction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -39,6 +42,8 @@ public class AuctionBean implements Serializable {
 
     private DAOFactory factory = DAOFactory.getFactory();
     private List<Book> books = new ArrayList<Book>();
+
+    private Long loggedInUserID;
 
     public AuctionBean() {
         setBooks();
@@ -67,6 +72,22 @@ public class AuctionBean implements Serializable {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public Book getSelectedBook() {
+        return selectedBook;
+    }
+
+    public void setSelectedBook(Book selectedBook) {
+        this.selectedBook = selectedBook;
+    }
+
+    public Long getLoggedInUserID() {
+        return loggedInUserID;
+    }
+
+    public void setLoggedInUserID(Long loggedInUserID) {
+        this.loggedInUserID = loggedInUserID;
     }
 
     public String addAuction() {
@@ -134,15 +155,14 @@ public class AuctionBean implements Serializable {
     }
 
     public String goToEditAuction(Auction a) {
-        auction=a;
+        auction = a;
         return "editAuction";
 
     }
- public String editAuction(Long id) {
+
+    public String editAuction(Long id) {
 
         getAndSetBookByID();
-
-        String titl = auction.getBook().getTitle();
         computeAuctionStatus();
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -152,6 +172,7 @@ public class AuctionBean implements Serializable {
 
         return "auction.xhtml";
     }
+
     public void cancelAuction(Auction auction) {
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -207,35 +228,65 @@ public class AuctionBean implements Serializable {
         bookDao.commitTransaction();
 
     }
+    public Book getBookById(Long id)
+    {
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+
+        Book book = (Book) bookDao.findByPrimaryKey(id);
+        
+        bookDao.commitTransaction();
+        
+        
+        return book;
+        
+    }
 
     public void setAuctionSeller() {
         User currentUser = getCurrentUser();
-        auction.setUser(null);
+
+        System.out.println("current user is" + currentUser.getFirstName());
+        auction.setUser(currentUser);
 
     }
 
     private User getCurrentUser() {
-        User u = null;
-        FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = fc.getExternalContext();
-        if (externalContext.getUserPrincipal() == null) {
-            System.out.println("current principal is null");
-        } else {
-            Long id = Long.parseLong(externalContext.getUserPrincipal().getName());
-            try {
 
-                UserDAO userDao = factory.getUserDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
 
-                userDao.beginTransaction();
+        Map<String, Object> map = context.getExternalContext().getSessionMap();
 
-                u = (User) userDao.findByPrimaryKey(id);
-                userDao.commitTransaction();
+        User currentUser = (User) map.get("LoggedInUser");
 
-            } catch (Exception ex) {
+        System.out.println("loggedin User id is" + currentUser.getFirstName());
+        return currentUser;
+    }
 
-            }
-        }
-        return u;
+    public List<Auction> getOpenAuctions() {
+
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+        auctionDao.beginTransaction();
+
+        List<Auction> openAuctions;
+        openAuctions= (List<Auction>) auctionDao.findByCriteria(Restrictions.like("status", Auction.statusType.PENDING));
+   
+        auctionDao.commitTransaction();
+       
+        return openAuctions;
+    }
+    
+    
+    @SuppressWarnings("empty-statement")
+    public void getBookDetail(FacesContext fc, UIComponent c, Object value) {
+
+        Long a = (Long)value;
+        System.out.println("a");
+        Book book= getBookById((Long)value);
+         auction.setBook(book);
+          
+         
+   
     }
 
 }

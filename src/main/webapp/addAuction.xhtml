@@ -26,17 +26,35 @@
                                                                 completeMethod="# {auctionBn.completeTitle()}" />-->
 
 
-                        <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" >
-                            <f:selectItems value="#{auctionBn.books}" var="book" itemValue="#{book.id}" itemLabel="#{book.title}" />
-
+                        <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" validator="#{auctionBn.getBookDetail}"  >
+                            <f:selectItems value="#{auctionBn.books}" var="book" 
+                                           itemValue="#{book.id}" itemLabel="#{book.title}  #{book.author}
+                                            #{book.edition} #{book.publisher}" >
+                                                               
+                        </f:selectItems>
+                            
+ <f:ajax event="change" render="bookDesc" />
                         </h:selectOneMenu>
-
-                        <h:message for="brands" style="color:red-;" />
-
+                        
                     </td>
                     <td>
-                        <!--<p:message  id="errorBookTitle"  for="bookTitle" />--></td>
+                        <!--<p:message  id="errorBookTitle"  for="bookTitle" />-->
+                        <p:outputLabel id="notFound"  /></td>
                 </tr>
+                
+                <t>
+                    
+                    <td>Book Detail</td>
+                    <td>
+<!--                        <p:outputLabel id="bookDesc"  />value="#{auction.auction.book.title}
+                                        #{auctionBn.auction.book.author}
+                                         #{auctionBn.auction.book.edition}
+                                        #{auctionBn.auction.book.publisher}" />-->
+                    
+                                        <p:outputLabel id="bookDesc" value="#{auctionBn.auction.book.title}" />
+                    </td>
+                   
+                </t>
                 <tr><td>
 
 
@@ -82,7 +100,7 @@
                 </tr>
             </table>
          
-
+            
             <h:commandButton action="#{auctionBn.addAuction}"
                              value ="Add New Auction"/>
         </h:form>

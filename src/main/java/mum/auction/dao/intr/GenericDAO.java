@@ -2,6 +2,7 @@ package mum.auction.dao.intr;
 
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.criterion.Criterion;
 
 /**
  *
@@ -24,4 +25,5 @@ interface GenericDAO < T, ID extends Serializable>
 	
 	void beginTransaction();
 	void commitTransaction();
+        List<T> findByCriteria(Criterion... criterion);
 }
