@@ -92,10 +92,9 @@ public class BookBean implements Serializable {
     }
 
     public String addBook() {
-
         
-        setCategory(getBookCategoryById(selectedCategoryId));
-        book.setBookCategory(getCategory());
+        setBookCategoryById(selectedCategoryId);
+        
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
        
@@ -188,14 +187,15 @@ public class BookBean implements Serializable {
         return "bookDetail.xhtml";
     }
     
-    public BookCategory getBookCategoryById(Long catId)
+    public void setBookCategoryById(Long catId)
     {
         BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
         bookCategoryDao.beginTransaction();
-        BookCategory category= (BookCategory) bookCategoryDao.findByPrimaryKey(catId);
-
+        category= (BookCategory) bookCategoryDao.findByPrimaryKey(catId);
+        book.setBookCategory(category);
+       System.out.println("category name is " + category.getName());
         
         bookCategoryDao.commitTransaction();
-        return category;
+       
     }
 }
