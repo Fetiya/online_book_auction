@@ -175,6 +175,6 @@ public class BookBean implements Serializable {
         bookDao.beginTransaction();
         book = (Book) bookDao.findByPrimaryKey(id);
         bookDao.commitTransaction();
-        return "bookDetail";
+        return "bookDetail.xhtml";
     }
 }

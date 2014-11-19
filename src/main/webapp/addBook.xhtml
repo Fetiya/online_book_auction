@@ -8,6 +8,11 @@
         <title>#{msgs.addBookTitle}</title>
     </h:head>
     <h:body>
+         <ui:composition template="/templates/masterLayout.xhtml">
+
+
+            <ui:define name="content">
+                <div id="templatemo_content_right">
        <h2>Add Book</h2>
        
         <h:form>
@@ -54,9 +59,9 @@
                          
             </h:panelGrid> 
             
-            <p>
-                <h:commandButton value="Add Book" action="#{bookBn.addBook}"  />  </p>     
+            
+                <div id="buy_now_button2"><h:commandLink value="Add Book" action="#{bookBn.addBook}"  /></div>     
         </h:form>
-        
+                </div></ui:define></ui:composition>
     </h:body>
 </html>
