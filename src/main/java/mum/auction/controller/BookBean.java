@@ -174,6 +174,9 @@ public class BookBean implements Serializable {
         BookDAO bookDao = factory.getBookDAO();
         bookDao.beginTransaction();
         book = (Book) bookDao.findByPrimaryKey(id);
+        
+        System.out.println("book id isi" + book.getTitle());
+        System.out.println("boook id "+ book.getId());
         bookDao.commitTransaction();
         return "bookDetail.xhtml";
     }
