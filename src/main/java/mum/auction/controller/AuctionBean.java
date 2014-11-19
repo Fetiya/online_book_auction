@@ -19,6 +19,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import mum.auction.dao.intr.*;
 import mum.auction.dao.intr.DAOFactory;
+import mum.auction.dao.intr.UserDAO;
 import mum.auction.domain.Auction;
 import mum.auction.domain.*;
 
@@ -131,10 +132,21 @@ public class AuctionBean implements Serializable {
 //        }
     }
 
-    public void cancelAuction() {
-        //   auctionDAO.removeAuction(auction);
-    }
+    public void cancelAuction(Auction auction) {
+        AuctionDAO auctionDao = factory.getAuctionDAO();
 
+        auctionDao.beginTransaction();
+        auctionDao.delete(auction);
+        auctionDao.commitTransaction();
+    }
+ public List<Auction> fetchAuctions() {
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+
+        auctionDao.beginTransaction();
+        List<Auction> auctions=auctionDao.findAll(0, 10);
+        auctionDao.commitTransaction();
+        return auctions;
+    }
     public List<String> completeTitle() {
         String query = null;
         List<String> results = new ArrayList<String>();

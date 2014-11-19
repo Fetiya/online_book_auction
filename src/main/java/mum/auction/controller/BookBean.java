@@ -161,4 +161,20 @@ public class BookBean implements Serializable {
 
     }
 
+    public List<Book> fetchBooks() {
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+        List<Book> books = bookDao.findAll(0, 10);
+        bookDao.commitTransaction();
+        return books;
+    }
+
+    public String getBookByID(Long id) {
+        BookDAO bookDao = factory.getBookDAO();
+        bookDao.beginTransaction();
+         book =(Book)bookDao.findByPrimaryKey(id);
+        bookDao.commitTransaction();
+        return "bookDetail";
+    }
 }

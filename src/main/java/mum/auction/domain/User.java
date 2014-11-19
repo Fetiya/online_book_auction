@@ -46,7 +46,15 @@ public class User {
 
     public User() {
     }
-
+public User(String firstName, String lastName, String studentId, Department department, String email, String userName, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.studentId = studentId;
+        this.department = department;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+    }
     public User(String firstName, String lastName, String studentId, Department department, String email, String userName, String password, List<Bid> bids) {
         this.firstName = firstName;
         this.lastName = lastName;

@@ -24,9 +24,9 @@ and open the template in the editor.
                     <h:form>
                         <h:panelGrid columns="2">
                             <h:outputText value="User name "/> 
-                            <h:inputText value="#{user.userName}"/>
+                            <h:inputText value="#{userBn.user.userName}"/>
                             <h:outputText value="Password "/> 
-                            <h:inputSecret value="#{user.password}"/>
+                            <h:inputSecret value="#{userBn.user.password}"/>
                             <h:link class="buy_now_button2"  value="Login" outcome="#{userBn.login()}"/>
                             <h:link class="buy_now_button2"  value="Sign Up" outcome="signUp"/>
 
