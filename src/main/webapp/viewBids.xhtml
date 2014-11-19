@@ -14,6 +14,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
+        
+        
         <ui:composition template="/templates/masterLayout.xhtml">
 
 
@@ -26,14 +28,14 @@ and open the template in the editor.
                             <div class="product_info">
                                 <p></p>
                                 <h3>Bids</h3>
-                                <h:dataTable value="#{bookBn.book.auctionList}" var="auction">
+                                <h:dataTable value="#{auctionBn.auction.bids}" var="bid">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Edition"
+                                            <h:outputText value="#{bid.auction.book.title}"
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{auction.book.edition}" />
+                                        <h:outputText value="Edition #{bid.auction.book.edition}" />
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
@@ -41,8 +43,18 @@ and open the template in the editor.
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{auction.minimumPrice}" />
+                                        <h:outputText value="Edition #{bid.auction.minimumPrice}" />
                                     </h:column>
+                                    
+                                     <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Bidder Name"
+                                                          style="font-weight: bold"/>
+                                        </f:facet>
+
+                                         <h:outputText value="Edition #{bid.user.firstName}" />
+                                    </h:column>
+                                    
                                 </h:dataTable>
                                 <h:outputText value="Enter bid"/>
                                 <h:inputText value=""/><br/><br/>

@@ -18,12 +18,13 @@ import mum.auction.domain.Auction;
 import mum.auction.domain.Bid;
 import mum.auction.domain.Book;
 import mum.auction.domain.User;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Fetiya
  */
-@Named("bid")
+@Named("bidBn")
 @SessionScoped
 public class BidBean implements Serializable {
     
@@ -75,5 +76,6 @@ public class BidBean implements Serializable {
         bidDao.commitTransaction();
         return "registered";
     }
-    
+   
+   
 }
