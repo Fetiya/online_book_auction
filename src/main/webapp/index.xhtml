@@ -28,7 +28,7 @@ and open the template in the editor.
                             <h:outputText value="Password "/> 
                             <h:inputSecret value="#{userBn.user.password}"/>
                             <h:commandLink class="buy_now_button2"  value="Login" action="#{userBn.login()}"/>
-                            <h:link class="buy_now_button2"  value="Sign Up" outcome="signUp"/>
+                            <h:commandLink class="buy_now_button2"  value="Sign Up" action="signUp"/>
 
                         </h:panelGrid>
                     </h:form>

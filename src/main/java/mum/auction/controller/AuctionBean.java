@@ -14,14 +14,15 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import mum.auction.dao.intr.*;
 import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.UserDAO;
-import mum.auction.domain.Auction;
 import mum.auction.domain.*;
+import mum.auction.domain.Auction;
 
 /**
  *
@@ -72,7 +73,7 @@ public class AuctionBean implements Serializable {
 
         getAndSetBookByID();
 
-        String titl = auction.getBook().getTitle();
+        setAuctionSeller();
         computeAuctionStatus();
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -205,6 +206,36 @@ public class AuctionBean implements Serializable {
         System.out.println("Book Title" + selectedBook.getTitle());
         bookDao.commitTransaction();
 
+    }
+
+    public void setAuctionSeller() {
+        User currentUser = getCurrentUser();
+        auction.setUser(null);
+
+    }
+
+    private User getCurrentUser() {
+        User u = null;
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = fc.getExternalContext();
+        if (externalContext.getUserPrincipal() == null) {
+            System.out.println("current principal is null");
+        } else {
+            Long id = Long.parseLong(externalContext.getUserPrincipal().getName());
+            try {
+
+                UserDAO userDao = factory.getUserDAO();
+
+                userDao.beginTransaction();
+
+                u = (User) userDao.findByPrimaryKey(id);
+                userDao.commitTransaction();
+
+            } catch (Exception ex) {
+
+            }
+        }
+        return u;
     }
 
 }

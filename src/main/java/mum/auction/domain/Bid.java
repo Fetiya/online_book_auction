@@ -29,7 +29,7 @@ public class Bid  {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "bid_id")
+    @JoinColumn(name = "auction_id")
     private Auction auction;
     
    
