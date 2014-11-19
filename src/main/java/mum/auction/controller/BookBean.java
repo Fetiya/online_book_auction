@@ -30,7 +30,7 @@ import mum.auction.domain.Auction;
 @SessionScoped
 public class BookBean implements Serializable {
 
-    private Book book= new Book();
+    private Book book = new Book();
     private List<Book> books = new ArrayList<Book>();
 
     private DAOFactory factory = DAOFactory.getFactory();
@@ -57,14 +57,14 @@ public class BookBean implements Serializable {
         this.books = books;
     }
 
-    public void addBook() {
+    public String addBook() {
 
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
         bookDao.beginTransaction();
         bookDao.save(book);
         bookDao.commitTransaction();
-
+        return "confirmBook";
     }
 
     public void validateBookTitle(FacesContext fc, UIComponent c, Object value) {
@@ -114,7 +114,7 @@ public class BookBean implements Serializable {
     public String getBookByID(Long id) {
         BookDAO bookDao = factory.getBookDAO();
         bookDao.beginTransaction();
-         book =(Book)bookDao.findByPrimaryKey(id);
+        book = (Book) bookDao.findByPrimaryKey(id);
         bookDao.commitTransaction();
         return "bookDetail";
     }

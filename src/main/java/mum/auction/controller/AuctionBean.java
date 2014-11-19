@@ -117,7 +117,7 @@ public class AuctionBean implements Serializable {
 //        } else {
         Date endDate = (Date) value;
 
-         //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
+        //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
         //    Date startDate = ((Date) startDateInput.getLocalValue());
 //
         if (endDate.before(new Date())) {
@@ -132,6 +132,25 @@ public class AuctionBean implements Serializable {
 //        }
     }
 
+    public String goToEditAuction(Auction a) {
+        auction=a;
+        return "editAuction";
+
+    }
+ public String editAuction(Long id) {
+
+        getAndSetBookByID();
+
+        String titl = auction.getBook().getTitle();
+        computeAuctionStatus();
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+
+        auctionDao.beginTransaction();
+        auctionDao.save(auction);
+        auctionDao.commitTransaction();
+
+        return "auction.xhtml";
+    }
     public void cancelAuction(Auction auction) {
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
@@ -139,14 +158,16 @@ public class AuctionBean implements Serializable {
         auctionDao.delete(auction);
         auctionDao.commitTransaction();
     }
- public List<Auction> fetchAuctions() {
+
+    public List<Auction> fetchAuctions() {
         AuctionDAO auctionDao = factory.getAuctionDAO();
 
         auctionDao.beginTransaction();
-        List<Auction> auctions=auctionDao.findAll(0, 10);
+        List<Auction> auctions = auctionDao.findAll(0, 10);
         auctionDao.commitTransaction();
         return auctions;
     }
+
     public List<String> completeTitle() {
         String query = null;
         List<String> results = new ArrayList<String>();
@@ -164,24 +185,23 @@ public class AuctionBean implements Serializable {
         bookDao.beginTransaction();
 
         books = bookDao.findAll(0, 10);
-        
-        for ( Book b : books)
-        {
+
+        for (Book b : books) {
             System.out.println("Book" + b.getTitle());
         }
         bookDao.commitTransaction();
 
     }
 
-     public void getAndSetBookByID() {
+    public void getAndSetBookByID() {
 
         BookDAO bookDao = factory.getBookDAO();
 
         bookDao.beginTransaction();
 
-        selectedBook = (Book)bookDao.findByPrimaryKey(bookId);
+        selectedBook = (Book) bookDao.findByPrimaryKey(bookId);
         auction.setBook(selectedBook);
-    
+
         System.out.println("Book Title" + selectedBook.getTitle());
         bookDao.commitTransaction();
 

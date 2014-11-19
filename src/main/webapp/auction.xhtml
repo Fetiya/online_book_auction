@@ -81,18 +81,11 @@ and open the template in the editor.
                                 <f:facet name="header">
                                     <h:outputText value=""
                                                   style="font-weight: bold"/>
-                                </f:facet>
-
-                                <h:outputText value="#{auction.endDate}" />
-                            </h:column><h:column>
-                                <f:facet name="header">
-                                    <h:outputText value=""
-                                                  style="font-weight: bold"/>
 
                                 </f:facet>
                                 <div class="buy_now_button"> <h:commandLink value="Edit"
 
-                                                                            action="#{auctionBn.cancelAuction(auction)}"/></div>
+                                                                            action="#{auctionBn.goToEditAuction(auction)}"/></div>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
