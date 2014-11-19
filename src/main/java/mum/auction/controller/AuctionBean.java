@@ -217,6 +217,9 @@ public class AuctionBean implements Serializable {
         return results;
 
     }
+//    public String viewMyBids(Long auctionId){
+//        
+//    }
 
     public void setBooks() {
         BookDAO bookDao = factory.getBookDAO();

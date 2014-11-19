@@ -19,7 +19,7 @@ and open the template in the editor.
     <body>
         <div id="templatemo_menu">
             <ul>
-                <li><a href="home.xhtml" class="current">Home</a></li>
+                <li><a href="home.xhtml" >Home</a></li>
                 <li><a href="viewBooks.xhtml">View Books</a></li>  
                 <li><a href="addAuction.xhtml">Add New Auction</a></li> 
                 <li><a href="openAuctions.xhtml">View  Open Auctions</a></li> 
@@ -36,7 +36,7 @@ and open the template in the editor.
         <div id="templatemo_header">
             <div id="templatemo_special_offers">
                 <h:form>
-                    <p:autoComplete id="acSimple"  value="#{book.book.title}" completeMethod="#{bookBn.fetchBooks()}" style=" background-color: #212120; " /><br/><br/>
+                    <p:autoComplete id="acSimple"  value="#{book.book.title}" completeMethod="#{bookBn.fetchBookTitles()}" style=" background-color: #212120; " /><br/><br/>
                     <div class="buy_now_button"><h:link  value="Search" outcome="home.xhtml"/></div>
                 </h:form>
             </div>
@@ -45,9 +45,9 @@ and open the template in the editor.
             <div id="templatemo_new_books">
                 <p style=" font-size: 18px">Recently added</p><br/>
                 <ul>
-                    <li>Suspen disse</li>
-                    <li>Maece nas metus</li>
-                    <li>In sed risus ac feli</li>
+                    <li>Core JSF</li>
+                    <li>Transcendental Meditation</li>
+                    <li>Head First Java</li>
                 </ul>
                 <!--            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>-->
             </div>

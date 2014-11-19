@@ -178,17 +178,17 @@ public class UserBean implements Serializable {
                 if (user.getPassword().equals(u.getPassword())) {
                     loggedUserId = u.getId();
                     loggedIn = true;
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    context.getExternalContext().getSessionMap().put("LoggedInUser", u);
                     return "home";
                 }
-                loggedIn = true;
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getSessionMap().put("LoggedInUser", u);
-                return "home";
             }
         }
-        return "index";
+            return "index";
 
+        
     }
+    
 
     public String logout() {
         loggedIn = false;
