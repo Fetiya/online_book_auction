@@ -7,55 +7,54 @@
         <title>#{msgs.addBookTitle}</title>
     </h:head>
     <h:body>
-        <h2>#{msgs.bookHeader}</h2>
+       <h2>Add Book</h2>
        
         <h:form>
             <h:panelGrid columns="3">
                 
-                #{msgs.bookTitle}
+                
+                Book Category:
+
+                <h:selectOneMenu id="bookList" value="#{bookBn.selectedCategoryId}" >
+                    <f:selectItems value="#{bookBn.bookCategories}" var="cat" itemValue="#{cat.id}" itemLabel="#{cat.name}" />
+
+                        </h:selectOneMenu>
+                               
+                    <h:message id="bookMenu" for="bookList" style="color: red"/>    
+   
+               Title:
                 <h:inputText  id="title" value="#{bookBn.book.title}"
-                                 validator="#{bookBn.validateBookTitle}">
-                       <f:ajax event="change" render="titleError"/>
+                                 required="true">
+                       
                 </h:inputText>       
                 <h:message id="titleError" for="title" style="color: red"/>
-                 
-                
-                #{msgs.bookDesc}
-                <h:inputTextarea id="desc" value="#{bookBn.book.desc}"
-                                 validator="#{bookBn.validateBookDescription}">
-                       <f:ajax event="change" render="descError"/>
-                </h:inputTextarea>       
+
+                Description:
+                <h:inputTextarea id="desc" value="#{bookBn.book.description}"
+                                 required="true"/>
+                    
                 <h:message id="descError" for="desc" style="color: red"/>
                 
-     
-                #{msgs.bookAuth}
+
+                Author:
                 <h:inputText id="auth" value="#{bookBn.book.author}"
-                                 validator="#{bookBn.validateBookAuthor}">
-                       <f:ajax event="change" render="authError"/>
-                </h:inputText>       
+                                required="true"/>       
                 <h:message id="authError" for="auth" style="color: red"/>
-                
-                
-                #{msgs.bookPub}
+
+                Publisher:
                 <h:inputText id="pub" value="#{bookBn.book.publisher}"
-                                 validator="#{bookBn.validateBookPublisher}">
-                       <f:ajax event="change" render="pubError"/>
-                </h:inputText>       
+                                 required="true" />       
                 <h:message id="pubError" for="pub" style="color: red"/>
-                
-                
-                #{msgs.bookEdit}
+
+                Edition:
                 <h:inputText id="edition" value="#{bookBn.book.edition}"
-                                 validator="#{bookBn.validateBookEdition}">
-                       <f:ajax event="change" render="editionError"/>
-                </h:inputText>       
+                                required="true"/>       
                 <h:message id="editionError" for="edition" style="color: red"/>
-                
-                
+                         
             </h:panelGrid> 
             
             <p>
-                <h:commandButton value="#{msgs.addBook}" action="#{bookBn.addBook}"  />  </p>     
+                <h:commandButton value="Add Book" action="#{bookBn.addBook}"  />  </p>     
         </h:form>
         
     </h:body>
