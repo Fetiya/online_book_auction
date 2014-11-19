@@ -28,7 +28,7 @@ import mum.auction.domain.BookCategory;
 @SessionScoped
 public class BookBean implements Serializable {
 
-    private Book book= new Book();
+    private Book book = new Book();
     private List<Book> books = new ArrayList<Book>();
     private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
     private BookCategory category = new BookCategory();
@@ -173,8 +173,8 @@ public class BookBean implements Serializable {
     public String getBookByID(Long id) {
         BookDAO bookDao = factory.getBookDAO();
         bookDao.beginTransaction();
-         book =(Book)bookDao.findByPrimaryKey(id);
+        book = (Book) bookDao.findByPrimaryKey(id);
         bookDao.commitTransaction();
-        return "bookDetail";
+        return "bookDetail.xhtml";
     }
 }

@@ -133,6 +133,25 @@ public class AuctionBean implements Serializable {
 //        }
     }
 
+    public String goToEditAuction(Auction a) {
+        auction=a;
+        return "editAuction";
+
+    }
+ public String editAuction(Long id) {
+
+        getAndSetBookByID();
+
+        String titl = auction.getBook().getTitle();
+        computeAuctionStatus();
+        AuctionDAO auctionDao = factory.getAuctionDAO();
+
+        auctionDao.beginTransaction();
+        auctionDao.save(auction);
+        auctionDao.commitTransaction();
+
+        return "auction.xhtml";
+    }
     public void cancelAuction(Auction auction) {
         AuctionDAO auctionDao = factory.getAuctionDAO();
 

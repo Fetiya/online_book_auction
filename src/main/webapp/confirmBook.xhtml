@@ -8,12 +8,18 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
    
   <h:head>
         <title>Confirm Book Page</title>
     </h:head>
     <h:body>
+         <ui:composition template="/templates/masterLayout.xhtml">
+
+
+            <ui:define name="content">
+                <div id="templatemo_content_right">
         <h:form>
        
             <h3>A new book has been  successfully Added </h3>
@@ -27,6 +33,6 @@ and open the template in the editor.
             <br/>
             <br/>
         <p:commandButton value="Add Another Book" action="addBook?faces-redirect=true"/>
-        </h:form>
+        </h:form></div></ui:define></ui:composition>
     </h:body>
 </html>
