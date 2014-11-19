@@ -44,7 +44,8 @@ public class UserBean implements Serializable {
     private String userName;
     private String password;
     private Long selectedId;
-
+    
+  //  public static logged
     
     private DAOFactory factory = DAOFactory.getFactory();
 
@@ -163,6 +164,7 @@ public class UserBean implements Serializable {
         for (User u : users) {
             if (user.getUserName().equals(u.getUserName())) {
                 loggedIn = true;
+            //    loggedInUserID= u.getId();
                 return "home";
             }
         }
