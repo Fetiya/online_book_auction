@@ -52,12 +52,12 @@ img {
 }
 
 .buy_now_button a{
-    clear: both;
+/*    clear: both;*/
     text-align: center;
     display: block;
-    width: 100px;
+    width: 70px;
     padding: 4px 0 5px 0;
-    margin-bottom: 10px; 
+    margin: 10px; 
     background: url(images/templatemo_btn_02.jpg) no-repeat;
     color: #FFFFFF;
     font-weight: bold;
@@ -91,7 +91,7 @@ img {
 }
 
 #templatemo_container{
-    width: 960px;
+    width: 1060px;
     margin: 0 auto;
     padding: 0 10px;
     height: 1000px;
@@ -103,7 +103,7 @@ img {
 
 #templatemo_menu {
     clear: both;
-    width: 960px;
+    width: 1060px;
     height: 45px;
     background: url(images/templatemo_menu_bg.jpg) no-repeat;
 }
@@ -137,7 +137,7 @@ img {
 /* header */
 #templatemo_header {
     clear: both;
-    width: 960px;
+    width: 1060px;
     height: 285px;
     padding: 0;
     margin: 0;
@@ -152,7 +152,7 @@ img {
     float: left;
     font-size: 14px;	
     margin-top: 95px;
-    margin-left: 490px;
+    margin-left: 590px;
     width: 180px;
 }
 
@@ -191,7 +191,7 @@ img {
 /* content */
 #templatemo_content {
     clear: both;
-    width: 920px;
+    width: 1020px;
     padding: 0 20px;
 }
 
@@ -205,7 +205,7 @@ img {
 
 #templatemo_content #templatemo_content_right {
     float: right;
-    width: 670px;
+    width: 770px;
 }
 
 
@@ -269,7 +269,13 @@ img {
     padding: 10px;
     border: 1px solid #333;
 }
-
+.templatemo_product_box4 {
+    margin-left: 150px;
+    width: 303px;
+    height: 100 px;
+    padding: 10px;
+    border: 1px solid #333;
+}
 #templatemo_content_right h1 {
     padding: 10px;
     margin: 0 0 20px 0;
@@ -277,7 +283,18 @@ img {
     color: #cbc750;
     background: url(images/templatemo_h1_bg.jpg);
 }
-
+table{
+    border: 1px solid #333;
+}
+td{
+    border-bottom: 1px solid #333;
+    width: 200px;
+    text-align: center
+}
+th{
+    color: #969547;
+    background: url(images/templatemo_menu_bg.jpg) no-repeat;
+}
 #templatemo_content_right h2 {
     padding: 0 0 0 0;
     margin: 0 0 20px 0;
@@ -343,8 +360,11 @@ img {
 
 /* footer */
 #templatemo_footer {
+    margin-bottom: 10px;
+    
+    position: relative;
     clear: both;
-    width: 960px;
+    width: 1060px;
     padding: 20px 0px 20px 0;
     text-align: center;
     border-top: 1px solid #25211e;

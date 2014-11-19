@@ -7,7 +7,9 @@ package mum.auction.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -19,6 +21,7 @@ import mum.auction.dao.intr.*;
 import mum.auction.dao.intr.BookDAO;
 import mum.auction.domain.Book;
 import mum.auction.domain.BookCategory;
+import mum.auction.domain.User;
 
 /**
  *
@@ -32,14 +35,11 @@ public class BookBean implements Serializable {
     private List<Book> books = new ArrayList<Book>();
     private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
     private BookCategory category = new BookCategory();
-    
+
     private Long selectedCategoryId;
-    
+
     private DAOFactory factory = DAOFactory.getFactory();
 
-    
-    
-    
     public BookBean() {
 
         initBookCategories();
@@ -53,16 +53,10 @@ public class BookBean implements Serializable {
         this.selectedCategoryId = selectedCategoryId;
     }
 
-    
-
-    
-    
     public Book getBook() {
         return book;
     }
 
-    
-    
     public void setBook(Book book) {
         this.book = book;
     }
@@ -97,17 +91,17 @@ public class BookBean implements Serializable {
         this.bookCategories = bookCategories;
     }
 
-    
-    
-    
-    public String  addBook() {
-
+    public String addBook() {
+        
+        setBookCategoryById(selectedCategoryId);
+        
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
+       
         bookDao.beginTransaction();
         bookDao.save(book);
         bookDao.commitTransaction();
-        
+
         return "confirmBook.xhtml";
 
     }
@@ -152,7 +146,7 @@ public class BookBean implements Serializable {
 
         categoryDao.beginTransaction();
 
-        bookCategories =(ArrayList<BookCategory>) categoryDao.findAll(0, 10);
+        bookCategories = (ArrayList<BookCategory>) categoryDao.findAll(0, 10);
 
         for (BookCategory b : bookCategories) {
             System.out.println("Bookcategory" + b.getName());
@@ -201,15 +195,39 @@ public class BookBean implements Serializable {
         bookDao.commitTransaction();
         return books;
     }
+ public List<String> fetchBookTitles() {
+        BookDAO bookDao = factory.getBookDAO();
+
+        bookDao.beginTransaction();
+        List<Book> books = bookDao.findAll(0, 10);
+        bookDao.commitTransaction();
+        List<String> bookTitles = new ArrayList();
+        for(Book b:books){
+            bookTitles.add(b.getTitle());
+                    }
+        return bookTitles;
+    }
 
     public String getBookByID(Long id) {
         BookDAO bookDao = factory.getBookDAO();
         bookDao.beginTransaction();
         book = (Book) bookDao.findByPrimaryKey(id);
-        
+
         System.out.println("book id isi" + book.getTitle());
-        System.out.println("boook id "+ book.getId());
+        System.out.println("boook id " + book.getId());
         bookDao.commitTransaction();
         return "bookDetail.xhtml";
+    }
+    
+    public void setBookCategoryById(Long catId)
+    {
+        BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
+        bookCategoryDao.beginTransaction();
+        category= (BookCategory) bookCategoryDao.findByPrimaryKey(catId);
+        book.setBookCategory(category);
+       System.out.println("category name is " + category.getName());
+        
+        bookCategoryDao.commitTransaction();
+       
     }
 }

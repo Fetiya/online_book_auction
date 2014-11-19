@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
@@ -19,6 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.Produces;
 import mum.auction.dao.intr.AuctionDAO;
 import mum.auction.dao.intr.DAOFactory;
 import mum.auction.dao.intr.DepartmentDAO;
@@ -44,10 +48,18 @@ public class UserBean implements Serializable {
     private String userName;
     private String password;
     private Long selectedId;
-    
-  //  public static logged
-    
+
+    private Long loggedUserId;
+
     private DAOFactory factory = DAOFactory.getFactory();
+
+    public Long getLoggedUserId() {
+        return loggedUserId;
+    }
+
+    public void setLoggedUserId(Long loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
 
     public Long getSelectedId() {
         return selectedId;
@@ -163,14 +175,20 @@ public class UserBean implements Serializable {
         userDao.commitTransaction();
         for (User u : users) {
             if (user.getUserName().equals(u.getUserName())) {
-                loggedIn = true;
-            //    loggedInUserID= u.getId();
-                return "home";
+                if (user.getPassword().equals(u.getPassword())) {
+                    loggedUserId = u.getId();
+                    loggedIn = true;
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    context.getExternalContext().getSessionMap().put("LoggedInUser", u);
+                    return "home";
+                }
             }
         }
-        return "index";
+            return "index";
 
+        
     }
+    
 
     public String logout() {
         loggedIn = false;

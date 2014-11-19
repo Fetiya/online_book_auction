@@ -33,7 +33,7 @@ and open the template in the editor.
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{auction.book.edition}" />
+                                        <h:outputText value=" #{auction.book.edition}" />
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
@@ -41,14 +41,27 @@ and open the template in the editor.
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{auction.minimumPrice}" />
+                                        <h:outputText value=" #{auction.minimumPrice}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Enter Bid"
+                                                          style="font-weight: bold"/>
+                                        </f:facet>
+
+                                        <h:inputText value="#{bid.offeredPrice}" size="5"/>
+                                    </h:column><h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value=""
+                                                          style="font-weight: bold"/>
+                                        </f:facet>
+                                <div class="buy_now_button2">
+                                    <h:commandLink  value="Bid" action="#{bid.registerBid(auction.id,userBn.loggedUserId)}"/>
+                                </div>
                                     </h:column>
                                 </h:dataTable>
                                 <h:outputText value="Enter bid"/>
-                                <h:inputText value=""/><br/><br/>
-                                <div class="buy_now_button2">
-                                    <h:commandLink  value="Bid" action="regstered.xhtml"/>
-                                    </div>
+                                <br/><br/>
 
                             </div>
                             <div class="cleaner"></div>
