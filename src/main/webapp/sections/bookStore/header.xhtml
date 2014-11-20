@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
 
       xmlns:p="http://primefaces.org/ui"
-      xmlns:util="http://xmlns.jcp.org/jsf/composite/util">
+     >
 
     <h:head>
         <title><ui:insert name="windowTitle"/></title>
@@ -34,7 +34,7 @@ and open the template in the editor.
         <div id="templatemo_header">
             <div id="templatemo_special_offers">
                 <h:form>
-                    <util:autoComplete value="#{bookBn.book.title}" completionItems="#{bookBn.fetchBookTitles()}"  /><br/><br/>
+                    <!--<util:autoComplete value="#{bookBn.book.title}" completionItems="#{bookBn.fetchBookTitles()}"  /><br/><br/>-->
                     <div class="buy_now_button"><h:link  value="Search" outcome="#{bookBn.showBooksByTitle()}"/></div>
                 </h:form>
             </div>

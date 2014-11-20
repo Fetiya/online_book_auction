@@ -301,20 +301,21 @@ public class AuctionBean implements Serializable {
         return openAuctions;
     }
 
-    @SuppressWarnings("empty-statement")
-    public void getBookDetail(FacesContext fc, UIComponent c, Object value) {
+    //@SuppressWarnings("empty-statement")
+   // public void getBookDetail(FacesContext fc, UIComponent c, Object value) {
 
-        Long a = (Long) value;
+    public void getBookDetail()
+    { // Long a = (Long) value;
         System.out.println("a");
 
         BookDAO bookDao = factory.getBookDAO();
 //
         bookDao.beginTransaction();
 //
-        selectedBook = (Book) bookDao.findByPrimaryKey((Long) value);
+        selectedBook = (Book) bookDao.findByPrimaryKey(getBookId());
         
         System.out.println("Selected book author is " + selectedBook.getAuthor());
-        //   auction.setBook(selectedBook);
+          auction.setBook(selectedBook);
         bookDao.commitTransaction();
 
         // 
