@@ -184,7 +184,7 @@ public class UserBean implements Serializable {
                 }
             }
         }
-        FacesContext.getCurrentInstance().addMessage("frmLogin:login", new FacesMessage("Wrong username or password!"));
+        FacesContext.getCurrentInstance().addMessage("frmLogin:login", new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Wrong username or password!"));
             return "index";
          
     }
