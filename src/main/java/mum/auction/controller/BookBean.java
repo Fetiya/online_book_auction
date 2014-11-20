@@ -22,6 +22,7 @@ import mum.auction.dao.intr.BookDAO;
 import mum.auction.domain.Book;
 import mum.auction.domain.BookCategory;
 import mum.auction.domain.User;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -154,22 +155,18 @@ public class BookBean implements Serializable {
         categoryDao.commitTransaction();
 
     }
-
-    
-    
+  
    public String displayBookByCategory(Long id) {
         BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
         bookCategoryDao.beginTransaction();
         category = (BookCategory) bookCategoryDao.findByPrimaryKey(id);
-        
-        System.out.println("book id isi" + category.getBooks());
-//        System.out.println("boook id "+ book.getId());
         bookCategoryDao.commitTransaction();
+        BookDAO bookDao = factory.getBookDAO();
+        bookDao.beginTransaction();
+        books = (List<Book>) bookDao.findByCriteria(Restrictions.like("bookCategory", category));
+           bookDao.commitTransaction();    
         return "displayBookByCategory.xhtml";
     }
-    
-    
-    
     
      public List<BookCategory> fetchBooksCategory() {
        BookCategoryDAO categoryDao = factory.getBookCategoryDAO();
