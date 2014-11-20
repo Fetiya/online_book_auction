@@ -9,9 +9,7 @@ public abstract class DAOFactory
 {
 	public static final Class FACTORY_CLASS = mum.auction.dao.intr.HibernateDAOFactory.class;
 	
-	//public static final class FACTORY_CLASS = JDBCDAOFactory.class;
-	//public static final class FACTORY_CLASS = JDODAOFactory.class;
-	
+		
 	public static DAOFactory getFactory()
 	{
 		try

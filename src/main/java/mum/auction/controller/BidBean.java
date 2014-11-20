@@ -8,7 +8,9 @@ package mum.auction.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import mum.auction.dao.intr.AuctionDAO;
 import mum.auction.dao.intr.BidDAO;
@@ -74,14 +76,15 @@ public class BidBean implements Serializable {
         bid.setAuction(auction);
         auctionDao.commitTransaction();
 
-        UserDAO userDao = factory.getUserDAO();
-        userDao.beginTransaction();
-        User user = userDao.findByPrimaryKey(userId);
+       // UserDAO userDao = factory.getUserDAO();
+       // userDao.beginTransaction();
+        User user =  getCurrentUser();   // userDao.findByPrimaryKey(userId);
         bid.setUser(user);
-        userDao.commitTransaction();
+        //userDao.commitTransaction();
         
-        bid= new Bid(auction,user,offeredPrice);
+        //bid= new Bid(auction,user,offeredPrice);
         
+        bid.setOfferedPrice(offeredPrice);
         BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
         bidDao.save(bid);
@@ -89,4 +92,16 @@ public class BidBean implements Serializable {
         return "registered";
     }
 
+    
+    private User getCurrentUser() {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        Map<String, Object> map = context.getExternalContext().getSessionMap();
+
+        User currentUser = (User) map.get("LoggedInUser");
+
+        System.out.println("loggedin User id is" + currentUser.getFirstName());
+        return currentUser;
+    }
 }

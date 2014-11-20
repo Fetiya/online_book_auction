@@ -333,27 +333,22 @@ public class AuctionBean implements Serializable {
         return userAuctionBids;
     }
 
-    public String getUserBidsByAuction(Auction auction, Long userId) {
-        UserDAO userDao = factory.getUserDAO();
-        userDao.beginTransaction();
-        User user=userDao.findByPrimaryKey(userId);
-        userDao.commitTransaction();
-  
-
+    public String getUserBidsByAuction(Auction auction) {
+      
         BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
 
-        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction", auction), Restrictions.like("user", user));
+        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction", auction));
 
         bidDao.commitTransaction();
         return "viewBids";
     }
 
-    public void populateUserAuctions() {
+    public List<Auction> populateUserAuctions() {
         AuctionDAO auctionDao = factory.getAuctionDAO();
         auctionDao.beginTransaction();
 
-        List<Auction> userAuctions;
+    //    List<Auction> userAuctions;
 
         // Long user_id= getCurrentUser().getId();
         int id = 1;
@@ -362,5 +357,7 @@ public class AuctionBean implements Serializable {
         auctionDao.commitTransaction();
 
         setUserAuctions(userAuctions);
+        
+        return userAuctions;
     }
 }
