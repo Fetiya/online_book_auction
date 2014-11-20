@@ -312,6 +312,8 @@ public class AuctionBean implements Serializable {
         bookDao.beginTransaction();
 //
         selectedBook = (Book) bookDao.findByPrimaryKey((Long) value);
+        
+        System.out.println("Selected book author is " + selectedBook.getAuthor());
         //   auction.setBook(selectedBook);
         bookDao.commitTransaction();
 
