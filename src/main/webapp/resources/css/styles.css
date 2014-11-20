@@ -63,6 +63,18 @@ img {
     font-weight: bold;
     text-decoration: none;
 }
+.buy_now_button1 {
+/*    clear: both;*/
+    text-align: center;
+    display: block;
+    width: 150px;
+    padding: 4px 0 5px 0;
+    margin: 10px; 
+    background: url(images/templatemo_btn_03.jpg) no-repeat;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none;
+}
 .buy_now_button2 {
     clear: both;
     text-align: center;
@@ -290,6 +302,10 @@ td{
     border-bottom: 1px solid #333;
     width: 200px;
     text-align: center
+}
+td.add{
+        width: 200px;
+        border-bottom: 0px;
 }
 th{
     color: #969547;

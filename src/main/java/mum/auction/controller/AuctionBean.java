@@ -45,16 +45,22 @@ public class AuctionBean implements Serializable {
     private List<Book> books = new ArrayList<Book>();
 
     private Long loggedInUserID;
+    private List<Bid> userAuctionBids = new ArrayList<Bid>();
 
     private List<Auction> userAuctions;
-    
-    
-    
-    
+
     public AuctionBean() {
         setBooks();
         //   auction.setBook(new Book());
         populateUserAuctions();
+    }
+
+    public List<Bid> getUserAuctionBids() {
+        return userAuctionBids;
+    }
+
+    public void setUserAuctionBids(List<Bid> userAuctionBids) {
+        this.userAuctionBids = userAuctionBids;
     }
 
     public List<Auction> getUserAuctions() {
@@ -64,8 +70,6 @@ public class AuctionBean implements Serializable {
     public void setUserAuctions(List<Auction> userAuctions) {
         this.userAuctions = userAuctions;
     }
-    
-    
 
     public Long getBookId() {
         return bookId;
@@ -217,9 +221,6 @@ public class AuctionBean implements Serializable {
         return results;
 
     }
-//    public String viewMyBids(Long auctionId){
-//        
-//    }
 
     public void setBooks() {
         BookDAO bookDao = factory.getBookDAO();
@@ -317,33 +318,33 @@ public class AuctionBean implements Serializable {
         return userAuctionBids;
     }
 
-    public List<Bid> getUserBidsByAuction() {
-     
+    public String getUserBidsByAuction(Auction auction, Long userId) {
+        UserDAO userDao = factory.getUserDAO();
+        userDao.beginTransaction();
+        User user=userDao.findByPrimaryKey(userId);
+        userDao.commitTransaction();
+
         BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
 
-        List<Bid> userAuctionBids;
-
-        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction_id", auction.getId()), Restrictions.like("auction_id", auction.getId()));
+        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction", auction), Restrictions.like("user", user));
 
         bidDao.commitTransaction();
-
-        return userAuctionBids;
+        return "viewBids";
     }
-    
-    public void populateUserAuctions()
-    {
+
+    public void populateUserAuctions() {
         AuctionDAO auctionDao = factory.getAuctionDAO();
         auctionDao.beginTransaction();
 
         List<Auction> userAuctions;
-        
-       // Long user_id= getCurrentUser().getId();
-        int id=1;
-        userAuctions = (List<Auction>) auctionDao.findByCriteria(Restrictions.like("user",getCurrentUser()));
+
+        // Long user_id= getCurrentUser().getId();
+        int id = 1;
+        userAuctions = (List<Auction>) auctionDao.findByCriteria(Restrictions.like("user", getCurrentUser()));
 
         auctionDao.commitTransaction();
 
-         setUserAuctions(userAuctions);
+        setUserAuctions(userAuctions);
     }
 }

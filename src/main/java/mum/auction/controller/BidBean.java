@@ -27,55 +27,66 @@ import org.hibernate.criterion.Restrictions;
 @Named("bidBn")
 @SessionScoped
 public class BidBean implements Serializable {
-    
+
     private Bid bid = new Bid();
     private double offeredPrice;
     private DAOFactory factory = DAOFactory.getFactory();
-    
+
     private List<Bid> bids = new ArrayList();
-    
+    private List<Bid> auctionBids;
+
     public double getOfferedPrice() {
         return offeredPrice;
     }
-    
+
     public void setOfferedPrice(double offeredPrice) {
         this.offeredPrice = offeredPrice;
     }
-    
+
+    public List<Bid> getAuctionBids() {
+        return auctionBids;
+    }
+
+    public void setAuctionBids(List<Bid> auctionBids) {
+        this.auctionBids = auctionBids;
+    }
+
     public Bid getBid() {
         return bid;
     }
-    
+
     public void setBid(Bid bid) {
         this.bid = bid;
     }
-    
+
     public List<Bid> getBids() {
         return bids;
     }
-    
+
     public void setBids(List<Bid> bids) {
         this.bids = bids;
     }
-    
+
     public String registerBid(Long auctionId, Long userId) {
-        BidDAO bidDao = factory.getBidDAO();
         AuctionDAO auctionDao = factory.getAuctionDAO();
         auctionDao.beginTransaction();
         Auction auction = auctionDao.findByPrimaryKey(auctionId);
+        bid.setAuction(auction);
         auctionDao.commitTransaction();
+
         UserDAO userDao = factory.getUserDAO();
         userDao.beginTransaction();
         User user = userDao.findByPrimaryKey(userId);
-        userDao.commitTransaction();
-        bid.setAuction(auction);
         bid.setUser(user);
-        bid.setOfferedPrice(offeredPrice);
+        userDao.commitTransaction();
+        
+        bid= new Bid(auction,user,offeredPrice);
+        
+        BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
         bidDao.save(bid);
         bidDao.commitTransaction();
         return "registered";
     }
-   
-   
+
 }

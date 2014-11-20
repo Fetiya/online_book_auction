@@ -10,7 +10,8 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
 
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:util="http://xmlns.jcp.org/jsf/composite/util">
 
     <h:head>
         <title><ui:insert name="windowTitle"/></title>
@@ -23,11 +24,8 @@ and open the template in the editor.
                 <li><a href="viewBooks.xhtml">View Books</a></li>  
                 <li><a href="addAuction.xhtml">Add New Auction</a></li> 
                 <li><a href="openAuctions.xhtml">View  Open Auctions</a></li> 
-                <li><a href="viewBids.xhtml">View Bids</a></li> 
-                <li><a href="addBook.xhtml">Add Book</a></li> 
-                <li><a href="auction.xhtml">Auction Status</a></li> 
-                <li><a href="userAuctions.xhtml">My Auctions</a></li> 
-                <li><a href="viewBooks.xhtml">View Bids</a></li>  
+                <li><a href="auction.xhtml">My Auctions</a></li> 
+                <li><a href="myBids.xhtml">My Bids</a></li>  
                 <li><a href="aboutUs.xhtml">About Us</a></li>  
                 <li><a href="index.xhtml">Logout</a></li> 
             </ul>
@@ -36,8 +34,8 @@ and open the template in the editor.
         <div id="templatemo_header">
             <div id="templatemo_special_offers">
                 <h:form>
-                    <p:autoComplete id="acSimple"  value="#{book.book.title}" completeMethod="#{bookBn.fetchBookTitles()}" style=" background-color: #212120; " /><br/><br/>
-                    <div class="buy_now_button"><h:link  value="Search" outcome="home.xhtml"/></div>
+                    <util:autoComplete value="#{bookBn.book.title}" completionItems="#{bookBn.fetchBookTitles()}"  /><br/><br/>
+                    <div class="buy_now_button"><h:link  value="Search" outcome="#{bookBn.showBooksByTitle()}"/></div>
                 </h:form>
             </div>
 
