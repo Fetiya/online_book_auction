@@ -29,8 +29,7 @@
 
                                     <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" validator="#{auctionBn.getBookDetail}" immediate="true"  >
                                         <f:selectItems value="#{auctionBn.books}" var="book" 
-                                                       itemValue="#{book.id}" itemLabel="#{book.title}  ,  by #{book.author}
-                                                       Edition #{book.edition} publisher #{book.publisher}" >
+                                                       itemValue="#{book.id}" itemLabel="#{book.title}" >
 
                                         </f:selectItems>
 

@@ -19,7 +19,7 @@ and open the template in the editor.
           <ui:define name="content">
                 <div id="templatemo_content_right">
             <h:form>
-+
+
                 <h:dataTable value="#{bookBn.books}" var="bookItemByCategory">
 <!--                    <h:column>
                         <h:outputText value="# {item.title}"/>
@@ -29,7 +29,7 @@ and open the template in the editor.
                         <f:facet name="header">
                         <h:outputText value="Picture" style="font-weight: bold"/>
                          </f:facet>
-                        <h:outputText value=" #{bookItemByCategory.pictureURL}" />
+                        <img src="#{bookItemByCategory.pictureURL}" />
                     </h:column>
 
                      <h:column>
