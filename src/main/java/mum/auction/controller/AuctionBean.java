@@ -338,7 +338,7 @@ public class AuctionBean implements Serializable {
         userDao.beginTransaction();
         User user=userDao.findByPrimaryKey(userId);
         userDao.commitTransaction();
-
+  
 
         BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
