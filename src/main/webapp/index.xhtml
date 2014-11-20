@@ -21,15 +21,16 @@ and open the template in the editor.
 
             <div id="templatemo_header">
                 <div id="templatemo_special_offers">
-                    <h:form>
+                    <h:form id="frmLogin">
                         <h:panelGrid columns="2">
                             <h:outputText value="User name "/> 
                             <h:inputText value="#{userBn.user.userName}"/>
                             <h:outputText value="Password "/> 
                             <h:inputSecret value="#{userBn.user.password}"/>
-                            <h:commandLink class="buy_now_button2"  value="Login" action="#{userBn.login()}"/>
+                            <h:commandLink id="login" class="buy_now_button2"  value="Login" action="#{userBn.login()}"
+                                          />
                             <h:commandLink class="buy_now_button2"  value="Sign Up" action="signUp"/>
-
+                            <h:message id="loginError" for="login" style="color:red" />
                         </h:panelGrid>
                     </h:form>
                 </div>
