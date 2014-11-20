@@ -14,8 +14,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        
-        
+
+
         <ui:composition template="/templates/masterLayout.xhtml">
 
 
@@ -24,43 +24,41 @@ and open the template in the editor.
                     <h:form>
                         <div class="templatemo_product_box3">
                             <h1></h1>
-                          
+
                             <div class="product_info">
                                 <p></p>
                                 <h3>Bids</h3>
-                                <h:dataTable value="#{auctionBn.auction.bids}" var="bid">
+                                <h:dataTable value="#{auctionBn.userAuctionBids}" var="bid">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="#{bid.auction.book.title}"
+                                            <h:outputText value="Offered Price"
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{bid.auction.book.edition}" />
+                                        <h:outputText value=" #{bid.offeredPrice}" />
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Minimum Price"
+                                            <h:outputText value="Bidder Name "
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                        <h:outputText value="Edition #{bid.auction.minimumPrice}" />
+                                        <h:outputText value=" #{bid.user.firstName} " />
+                                        <h:outputText value=" #{bid.user.lastName} " />
+
                                     </h:column>
-                                    
-                                     <h:column>
+
+                                    <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Bidder Name"
+                                            <h:outputText value="Bidder Email"
                                                           style="font-weight: bold"/>
                                         </f:facet>
 
-                                         <h:outputText value="Edition #{bid.user.firstName}" />
+                                        <h:outputText value=" #{bid.user.email}" />
                                     </h:column>
-                                    
+
                                 </h:dataTable>
-                                <h:outputText value="Enter bid"/>
-                                <h:inputText value=""/><br/><br/>
-                                <div class="buy_now_button2">
-                                    <h:commandLink  value="Bid" action="regstered.xhtml"/>
-                                    </div>
+                               
 
                             </div>
                             <div class="cleaner"></div>

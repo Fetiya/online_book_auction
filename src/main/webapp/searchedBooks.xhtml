@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>MUM book auction</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+
+
+            <ui:define name="content">
+                <div id="templatemo_content_right">
+                    <h:form>
+                        <h:dataTable value="#{bookBn.searchedBooks}" var="boo">
+                                                 
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cover"
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+
+                                <img src="#{boo.pictureURL}" alt="image" />                      
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Title"
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+
+                                <h:outputText value="#{boo.title}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Author"
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+
+                                <h:outputText value="#{boo.author}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Edition"
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+
+                                <h:outputText value="#{boo.edition}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""
+                                                  style="font-weight: bold"/>
+                                </f:facet>
+                                <div class="buy_now_button"> <h:commandLink value="Detail"
+
+                                action="#{bookBn.getBookByID(boo.id)}"/></div>
+
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                </div> 
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

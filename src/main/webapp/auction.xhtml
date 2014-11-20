@@ -20,7 +20,7 @@ and open the template in the editor.
             <ui:define name="content">
                 <div id="templatemo_content_right">
                     <h:form>
-                        <h:dataTable value="#{auctionBn.fetchAuctions()}" var="auction">
+                        <h:dataTable value="#{auctionBn.userAuctions}" var="auction">
 
                             <h:column>
                                 <f:facet name="header">
@@ -104,7 +104,7 @@ and open the template in the editor.
                                 </f:facet>
                                 <div class="buy_now_button"> <h:commandLink value="Bids"
 
-                                                                            action="#{auctionBn.viewMyBids(auction.id)}"/></div>
+                                                                            action="#{auctionBn.getUserBidsByAuction(auction,userBn.loggedUserId)}"/></div>
 
                             </h:column>
                         </h:dataTable>

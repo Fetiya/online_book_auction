@@ -36,7 +36,7 @@ public class BookBean implements Serializable {
     private List<Book> books = new ArrayList<Book>();
     private List<BookCategory> bookCategories = new ArrayList<BookCategory>();
     private BookCategory category = new BookCategory();
-
+    private List<Book> searchedBooks = new ArrayList<Book>();
     private Long selectedCategoryId;
 
     private DAOFactory factory = DAOFactory.getFactory();
@@ -98,7 +98,7 @@ public class BookBean implements Serializable {
         
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
-       
+
         bookDao.beginTransaction();
         bookDao.save(book);
         bookDao.commitTransaction();
@@ -192,17 +192,36 @@ public class BookBean implements Serializable {
         bookDao.commitTransaction();
         return books;
     }
- public List<String> fetchBookTitles() {
+
+    public String[] fetchBookTitles() {
         BookDAO bookDao = factory.getBookDAO();
 
         bookDao.beginTransaction();
         List<Book> books = bookDao.findAll(0, 10);
         bookDao.commitTransaction();
-        List<String> bookTitles = new ArrayList();
-        for(Book b:books){
-            bookTitles.add(b.getTitle());
-                    }
+        String[] bookTitles = new String[books.size()];
+        if (books.size() > 0) {
+            for (int i = 0; i < books.size(); i++) {
+                bookTitles[i] = books.get(i).getTitle();
+            }
+        }
         return bookTitles;
+    }
+
+    public List<Book> getSearchedBooks() {
+        return searchedBooks;
+    }
+
+    public void setSearchedBooks(List<Book> searchedBooks) {
+        this.searchedBooks = searchedBooks;
+    }
+
+    public String showBooksByTitle() {
+        BookDAO bookDao = factory.getBookDAO();
+        bookDao.beginTransaction();
+        searchedBooks = bookDao.findByCriteria(Restrictions.like("title", book.getTitle()));
+        bookDao.commitTransaction();
+        return "searchedBooks";
     }
 
     public String getBookByID(Long id) {

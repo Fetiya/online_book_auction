@@ -14,16 +14,17 @@
 
             <ui:define name="content">
                 <div id="templatemo_content_right">
-                    <h3> Add New Auction</h3>
-                    <h:form>
+                    <div class="templatemo_product_box3"> 
+        <h1> Add New Auction</h1>
+        <h:form>
 
-                        <table cellpadding="5">
-                            <tr>
-                                <td>
-                                    <h:outputLabel value="Select book" for="bookTitle" /></td>
-                                <td>
-                                    <!--                        <p:autoComplete id="bookTitle" value="# {auctionBn.auction.book.title}" 
-                                                                            completeMethod="# {auctionBn.completeTitle()}" />-->
+            <table >
+                <tr>
+                    <td class="add">
+                        <h:outputLabel value="Select Book Title" for="bookTitle" /></td>
+                    <td class="add">
+                        <!--                        <p:autoComplete id="bookTitle" value="# {auctionBn.auction.book.title}" 
+                                                                completeMethod="# {auctionBn.completeTitle()}" />-->
 
 
                                     <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" validator="#{auctionBn.getBookDetail}" immediate="true"  >
@@ -58,52 +59,52 @@
                             <tr><td>
 
 
-                                    <p:outputLabel  for="startDate" value="Auction start date" /></td>
-                                <td>
+                        <p:outputLabel  for="startDate" value="StartDate" /></td>
+                    <td class="add">
 
                                     <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"
                                                 required="true"                  
                                                 validator="#{auctionBn.validateStartDate}">
 
-                                        <p:ajax event="change" update="errorStartDate"/>
-                                    </p:calendar>
-                                </td>
-                                <td>
-                                    <p:message  id="errorStartDate"  for="startDate" />
-                                </td>
-                            </tr>
-                            <tr>
+                            <p:ajax event="change" update="errorStartDate"/>
+                        </p:calendar>
+                    </td>
+                    <td class="add">
+                        <p:message  id="errorStartDate"  for="startDate" />
+                    </td>
+                </tr>
+                <tr>
 
-                                <td><p:outputLabel for="endDate" value="Auction end date" /></td>
-                                <td>
-                                    <p:calendar id="endDate" value="#{auctionBn.auction.endDate}" required="true"
-                                                validator="#{auctionBn.validateEndDate}">
+                    <td class="add"><p:outputLabel for="endDate" value="Auction end date" /></td>
+                    <td class="add">
+                        <p:calendar id="endDate" value="#{auctionBn.auction.endDate}" required="true"
+                                    validator="#{auctionBn.validateEndDate}">
 
-                                        <p:ajax event="change" update="errorEndDate"/>
-                                    </p:calendar>
-                                </td>
-                                <td>
-                                    <p:message id="errorEndDate" for="endDate" style="color: red"/>
-                                </td>
-                            </tr>
+                            <p:ajax event="change" update="errorEndDate"/>
+                        </p:calendar>
+                    </td>
+                    <td class="add">
+                        <p:message id="errorEndDate" for="endDate" style="color: red"/>
+                    </td>
+                </tr>
 
-                            <tr>
-                                <td>
-                                    <p:outputLabel for="price" value="Minimum Bid price($)"  /></td>
-                                <td>
-                                    <p:inputText  id="price" value="#{auctionBn.auction.minimumPrice}" required="true">
-                                        <f:validateDoubleRange minimum="0" />
-                                    </p:inputText></td>
-                                <td>
-                                    <p:message id="errorPrice" for="price" style="color: red" />
-                                </td>
-                            </tr>
-                        </table>
-
-
-                        <h:commandButton action="#{auctionBn.addAuction}"
-                                         value ="Add"/>
-                    </h:form>
+                <tr>
+                    <td class="add">
+                        <p:outputLabel for="price" value="Minimum Bid price($)"  /></td>
+                    <td class="add">
+                        <p:inputText  id="price" value="#{auctionBn.auction.minimumPrice}" required="true">
+                            <f:validateDoubleRange minimum="0" />
+                        </p:inputText></td>
+                    <td class="add">
+                        <p:message id="errorPrice" for="price" style="color: red" />
+                    </td>
+                </tr>
+            </table>
+         
+            
+            <h:commandLink class="buy_now_button1" action="#{auctionBn.addAuction}"
+                                                        value ="Add Auction"/>
+        </h:form></div>
                 </div></ui:define></ui:composition>
     </h:body>
 </html>

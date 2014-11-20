@@ -45,6 +45,7 @@ public class AuctionBean implements Serializable {
     private List<Book> books = new ArrayList<Book>();
 
     private Long loggedInUserID;
+    private List<Bid> userAuctionBids = new ArrayList<Bid>();
 
     private List<Auction> userAuctions;
 
@@ -52,6 +53,14 @@ public class AuctionBean implements Serializable {
         setBooks();
         //   auction.setBook(new Book());
         populateUserAuctions();
+    }
+
+    public List<Bid> getUserAuctionBids() {
+        return userAuctionBids;
+    }
+
+    public void setUserAuctionBids(List<Bid> userAuctionBids) {
+        this.userAuctionBids = userAuctionBids;
     }
 
     public List<Auction> getUserAuctions() {
@@ -217,9 +226,6 @@ public class AuctionBean implements Serializable {
         return results;
 
     }
-//    public String viewMyBids(Long auctionId){
-//        
-//    }
 
     public void setBooks() {
         BookDAO bookDao = factory.getBookDAO();
@@ -326,18 +332,20 @@ public class AuctionBean implements Serializable {
         return userAuctionBids;
     }
 
+    public String getUserBidsByAuction(Auction auction, Long userId) {
+        UserDAO userDao = factory.getUserDAO();
+        userDao.beginTransaction();
+        User user=userDao.findByPrimaryKey(userId);
+        userDao.commitTransaction();
     public List<Bid> getUserBidsByAuction() {
 
         BidDAO bidDao = factory.getBidDAO();
         bidDao.beginTransaction();
 
-        List<Bid> userAuctionBids;
-
-        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction_id", auction.getId()), Restrictions.like("auction_id", auction.getId()));
+        userAuctionBids = (List<Bid>) bidDao.findByCriteria(Restrictions.like("auction", auction), Restrictions.like("user", user));
 
         bidDao.commitTransaction();
-
-        return userAuctionBids;
+        return "viewBids";
     }
 
     public void populateUserAuctions() {
