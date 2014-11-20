@@ -18,11 +18,12 @@ and open the template in the editor.
                 <div id="templatemo_content_left">
                     <div class="templatemo_content_left_section">
                         <h1>Categories</h1>
-                        <ul>
-                            
-                            <li><a href="#">Computer Science</a></li>
-                            <li><a href="#">Physics</a></li>
-                            <li><a href="#">Biology</a></li>
-                        </ul>
-                    </div> </div> </body>
+        <h:form>
+            <h:dataTable value="#{bookBn.fetchBooksCategory()}" var="boo">                                           
+                <h:column>         
+                <h:commandLink  value="#{boo.name}" action="#{bookBn.displayBookByCategory(boo.id)}" /> 
+                </h:column>
+            </h:dataTable>
+        </h:form>
+           </div> </div> </body>
 </html>

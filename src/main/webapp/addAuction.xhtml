@@ -9,7 +9,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
- <ui:composition template="/templates/masterLayout.xhtml">
+        <ui:composition template="/templates/masterLayout.xhtml">
 
 
             <ui:define name="content">
@@ -27,47 +27,44 @@
                                                                 completeMethod="# {auctionBn.completeTitle()}" />-->
 
 
-                        <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" validator="#{auctionBn.getBookDetail}"  >
-                            <f:selectItems value="#{auctionBn.books}" var="book" 
-                                           itemValue="#{book.id}" itemLabel="#{book.title}  #{book.author}
-                                            #{book.edition} #{book.publisher}" >
-                                                               
-                        </f:selectItems>
-                            
-                  
- <f:ajax event="change" render="bookDesc" />
-                        </h:selectOneMenu>
-                        
-                    </td>
-                    <td class="add"> <h:commandLink class="buy_now_button1" value="Add a New Book" immediate="true"
+                                    <h:selectOneMenu id="bookTitle" value="#{auctionBn.bookId}" validator="#{auctionBn.getBookDetail}" immediate="true"  >
+                                        <f:selectItems value="#{auctionBn.books}" var="book" 
+                                                       itemValue="#{book.id}" itemLabel="#{book.title}  ,  by #{book.author}
+                                                       Edition #{book.edition} publisher #{book.publisher}" >
 
-                                                                            action="addBook.xhtml"/></td>
-                    <td class="add">
-                        <!--<p:message  id="errorBookTitle"  for="bookTitle" />-->
-                        <p:outputLabel id="notFound"  /></td>
-                </tr>
-                
-                <tr>
-                    
-                    <td class="add">Book Detail</td>
-                    <td class="add">
-<!--                        <p:outputLabel id="bookDesc"  />value="#{auction.auction.book.title}
-                                        #{auctionBn.auction.book.author}
-                                         #{auctionBn.auction.book.edition}
-                                        #{auctionBn.auction.book.publisher}" />-->
-                    
-                                        <p:outputLabel id="bookDesc" value="#{auctionBn.auction.book.title}" />
-                    </td>
-                </tr>
-                <tr><td class="add">
+                                        </f:selectItems>
+
+                                        <f:ajax event="change" render="bookDesc" />
+                                    </h:selectOneMenu>
+
+                                </td>
+                                <td>
+                                    <!--<p:message  id="errorBookTitle"  for="bookTitle" />-->
+                                    <p:outputLabel id="notFound"  /></td>
+                            </tr>
+
+                            <t>
+
+                                <td></td>
+                                <td>
+                                    <!--                        <p:outputLabel id="bookDesc"  />value=" # {auction.auction.book.title}
+                                    # {auctionBn.auction.book.author}
+                                    # {auctionBn.auction.book.edition}
+                                    # {auctionBn.auction.book.publisher}" />-->
+
+                                    <p:outputLabel id="bookDesc" value="#{auctionBn.auction.book.title}" />
+                                </td>
+
+                            </t>
+                            <tr><td>
 
 
                         <p:outputLabel  for="startDate" value="StartDate" /></td>
                     <td class="add">
 
-                        <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"
-                                    required="true"                  
-                                    validator="#{auctionBn.validateStartDate}">
+                                    <p:calendar id="startDate" value="#{auctionBn.auction.startDate}"
+                                                required="true"                  
+                                                validator="#{auctionBn.validateStartDate}">
 
                             <p:ajax event="change" update="errorStartDate"/>
                         </p:calendar>

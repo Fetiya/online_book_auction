@@ -93,9 +93,9 @@ public class BookBean implements Serializable {
     }
 
     public String addBook() {
-
-        setCategory(getBookCategoryById(selectedCategoryId));
-        book.setBookCategory(getCategory());
+        
+      //  setBookCategoryById(selectedCategoryId);
+        
         BookDAO bookDao = factory.getBookDAO();
         // bookDao.addBook(book);
 
@@ -155,7 +155,35 @@ public class BookBean implements Serializable {
         categoryDao.commitTransaction();
 
     }
+  
+   public String displayBookByCategory(Long id) {
+        BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
+        bookCategoryDao.beginTransaction();
+        category = (BookCategory) bookCategoryDao.findByPrimaryKey(id);
+        bookCategoryDao.commitTransaction();
+        BookDAO bookDao = factory.getBookDAO();
+        bookDao.beginTransaction();
+        books = (List<Book>) bookDao.findByCriteria(Restrictions.like("bookCategory", category));
+           bookDao.commitTransaction();    
+        return "displayBookByCategory.xhtml";
+    }
+    
+     public List<BookCategory> fetchBooksCategory() {
+       BookCategoryDAO categoryDao = factory.getBookCategoryDAO();
 
+        categoryDao.beginTransaction();
+
+        bookCategories =(ArrayList<BookCategory>) categoryDao.findAll(0, 10);
+
+//        for (BookCategory b : bookCategories) {
+//            System.out.println("Bookcategory" + b.getName());
+//        }
+        categoryDao.commitTransaction();
+        return bookCategories;
+    }
+    
+    
+    
     public List<Book> fetchBooks() {
         BookDAO bookDao = factory.getBookDAO();
 
@@ -207,12 +235,12 @@ public class BookBean implements Serializable {
         return "bookDetail.xhtml";
     }
 
-    public BookCategory getBookCategoryById(Long catId) {
+    public void getBookCategoryById(Long catId) {
         BookCategoryDAO bookCategoryDao = factory.getBookCategoryDAO();
         bookCategoryDao.beginTransaction();
-        BookCategory category = (BookCategory) bookCategoryDao.findByPrimaryKey(catId);
-
+        category= (BookCategory) bookCategoryDao.findByPrimaryKey(catId);
+        book.setBookCategory(category);
         bookCategoryDao.commitTransaction();
-        return category;
+       
     }
 }

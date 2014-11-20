@@ -130,14 +130,15 @@ public class AuctionBean implements Serializable {
         Date today = new Date();
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 
-        if (fmt.format(today).equals(fmt.format(auction.getStartDate()))) {
+////        if (fmt.format(today).equals(fmt.format(auction.getStartDate()))) {
+////            auction.setStatus(Auction.statusType.OPEN);
+////        } else
+//        if (auction.getStartDate().after(today)) {
+//            auction.setStatus(Auction.statusType.PENDING);
+//
+//        } else {
             auction.setStatus(Auction.statusType.OPEN);
-        } else if (auction.getStartDate().after(today)) {
-            auction.setStatus(Auction.statusType.PENDING);
-
-        } else {
-            auction.setStatus(Auction.statusType.OPEN);
-        }
+      //  }
     }
 
     public void validateStartDate(FacesContext fc, UIComponent component, Object value) {
@@ -160,19 +161,23 @@ public class AuctionBean implements Serializable {
 //        } else {
         Date endDate = (Date) value;
 
-        //   UIInput startDateInput = (UIInput) component.findComponent("startDate");
-        //    Date startDate = ((Date) startDateInput.getLocalValue());
-//
+        UIInput startDateInput = (UIInput) component.findComponent("startDate");
+        Date startDate = ((Date) startDateInput.getLocalValue());
+
         if (endDate.before(new Date())) {
             throw new ValidatorException(
                     new FacesMessage("End date should be current or valid future date"));
 
-        }
-        //else if (endDate.before(startDate)) {
-//                throw new ValidatorException(
-//                        new FacesMessage("Auction end date should be later than start date"));
-//            }
-//        }
+       } 
+          else if (endDate.before(startDate)) {
+           throw new ValidatorException(
+                  new FacesMessage("Auction end date should be latter than start date"));
+
+       }
+        else
+          {
+              System.out.println("end date is valid");
+          }
     }
 
     public String goToEditAuction(Auction a) {
@@ -301,9 +306,16 @@ public class AuctionBean implements Serializable {
 
         Long a = (Long) value;
         System.out.println("a");
-        Book book = getBookById((Long) value);
-        // auction.setBook(book);
 
+        BookDAO bookDao = factory.getBookDAO();
+//
+        bookDao.beginTransaction();
+//
+        selectedBook = (Book) bookDao.findByPrimaryKey((Long) value);
+        //   auction.setBook(selectedBook);
+        bookDao.commitTransaction();
+
+        // 
     }
 
     public List<Bid> getBidsByAuction() {
